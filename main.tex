@@ -1,16 +1,20 @@
-\documentclass[12pt]{amsart}
+\documentclass{amsart}
 \usepackage{amsmath,amssymb,amsthm,amsfonts}
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{babel}
 \usepackage{qcircuit}
 \usepackage{datetime}
+\usepackage{ragged2e}
+\usepackage{siunitx}
 \include{amsartedits}
+\DeclareMathOperator{\lcm}{lcm}
 \newdateformat{monthyeardate}{%
   \monthname[\THEMONTH] \THEYEAR}
+\numberwithin{equation}{section}
 
 \title{Quantum Computing}
-\author{Elliott Ashby \\ Physics and Astronomy \\ University of Southampton}
+\author[Elliott Ashby]{Elliott Ashby \\ Physics and Astronomy \\ University of Southampton}
 \date{\monthyeardate\today}
 % ----------------------------------------------------------------
 
@@ -20,22 +24,88 @@
 \end{abstract}
 \maketitle
 \tableofcontents
+\newpage
 \section{Introduction}
-Animals gain advantages in many ways, one of which is the exploitation of properties of the physical world. This has come to culmination in humans; In 1941 we saw the creation of the first programmable computer, the Z3, by Konrad Zuse, and in the following decades we have continually perfected this technology. The modern computer that we use today is, at its fundamental principals, identical to the Z3, performing binary operations on "bits" - a 1 or a 0 - of data in order to encode useful computational results. \\
-\\
-The Z3 used 
+\begin{justify}
+Animals gain advantages in many ways, one of which is the exploitation of properties of the physical world. This has come to culmination in humans; in 1941 we saw the creation of the first programmable computer, the Z3, by Konrad Zuse, and in the following decades we have continually perfected this technology. The modern computer that we use today is, at its fundamental principals, identical to the Z3, performing binary operations on "bits" (a 1 or a 0) of data in order to encode useful computational results. \\
+
+The Z3 used electromagnetic relays (600 in the arithmetic unit, 1,400 to store 64 words) and was close in size to the Stibitz BTL Model 1 or a large, floor-to-ceiling bookshelf. \cite{KonradZuseObituary} In the decades following the Z3, the space required to store and operate computer memory has decreased significantly, and as stated by Moore in 1965, "The complexity for minimum component costs has increased at a rate of roughly a factor of two per year." \cite{Moore1965} This has largely held true, thanks to increasingly smaller and smaller manufacturing processes. \\
+
+As of 2022 the smallest transistors are of the order of 3nm, \cite{Samsung_2022} but when we shrink further down to 2nm or beyond, we begin to approach the size of the atom; at this scale, quantum effects are more pronounced and the transistor can leak current due to gate direct tunnelling. \cite{2nmGateOxide} These effects limit the effectiveness of classical computers at this scale, and so we must look to new technologies to push the boundaries of computation.
+\end{justify}
 
 \section{An Overview of Key Concepts}
-\subsection{History of Quantum Computing}
+\subsection{A Brief History of Quantum Computing}
+\begin{justify}
+During the majority of the 20th century up until the early 1980s the fields of quantum mechanics and computer science were, for the most part, separate areas of study despite some crossover such as the application of the laser. But in 1980, Paul Benioff proposed a quantum mechanical model of the computer and computation process \cite{Benioff1980} and additionally, in the same year, Yuri Manin proposed a similar model. \cite{Manin1980} In the following years, Richard Feynman wrote a paper suggesting that the use of quantum phenomena to perform computations could be more efficient for computer physics simulations than classical computers. \cite{Feynman1982} \\
+Just 2 years following this, in 1984, Charles Bennett and Gilles Brassard continued to merge quantum mechanics and computer science by introducing quantum cryptography \cite{BennettBrassard1984} showing that a quantum key distribution can be used to secure communications. \\
+
+Following the proposal of the quantum model of computation, quantum algorithms began to be developed, including Deutsch's algorithm in 1985, \cite{Deutsch1985} the Bernstein-Vazirani algorithm in 1993, \cite{BernsteinVazirani1993} and Simon's algorithm in 1994. \cite{Simon1994} Building on these papers, Peter Shor published his work on prime factorization quantum algorithms which had real world application breaking the RSA and Diffie-Hellman encryption algorithms. \cite{Shor1994} Just 2 years later in 1996, Lov Grover published his algorithm for database search \cite{Grover1996} and in the same year Seth Lloyd finally proved Feynman's conjecture that he proposed in 1982 that quantum computers can be programmed to simulate any local quantum system. \cite{Lloyd1996} \\
+
+The first quantum computer to be built was in 1998; Isaac Chuang and Neil Gershenfeld along with Mark Kubinec implemented Grover's search algorithm with a 2-qubit (the quantum equivalent to bits) nuclear magnetic resonance (NMR) quantum computer. \cite{ChuangGershefeldKubinec1998} In the years following, NMR quantum computers would increase in the number of qubits allowing for a 7-qubit quantum computer to run Shor's algorithm in 2001. \cite{Vandersypen2001} \\
+
+Since then, quantum computing has continued to grow, with new technologies and greater numbers of qubits. The most promising of these is the superconducting circuit used as a qubit. Originally proposed in 1999 by Yasunobu Nakamura, Yuri Pashkin and Jaw-Shen Tsai, \cite{NakamuraPashkinTsai1999} and shown to be viable for greater application in 2007 by Jelle Plantenberg, P.C. de Groot, C.J.P.M. Harmans and Hans Mooij by demonstrating the controlled-NOT gate, \cite{PlantenbergGrootHarmansMooij2007} superconducting qubits have become the focus of many large companies such as IBM and Google. \\
+
+As of 2024, the quantum computer with the most number of qubits is actually not a superconducting quantum computer, but an atomic array quantum computer built by Atom Computing in 2023 \cite{Atom2023, Atom2024} with a reported 1,180 qubits. However, since atomic array quantum computers are much newer than superconducting quantum computers, they have less general support for quantum algorithms; the largest superconducting quantum computer as of 2024 is IBM's Condor with 1121 qubits. \cite{IBM2023, AbuGhanem2024} \\
+
+The field of quantum computing is still in it's infancy, but with promising results and continued growth, it is likely that quantum computers will become more relevant in the coming years.
+\end{justify}
+
 \subsection{Limitations of Classical Computers and the Need for Quantum Computing}
-\subsection{Quantum Bits and Parrallelism}
+\subsubsection{Public-key Cryptography and Factorization of Big Numbers}
+\begin{justify}
+In 1976, Whitfield Diffie and Martin Hellman published their paper on new directions in cryptography, \cite{DiffieHellman1976} introducing to the general public the concept of public-key cryptography; a method of encryption that uses a pair of keys, public and private, to encrypt and decrypt messages. With the public key, one can encrypt a message that only the private key can decrypt. 2 years later in 1978, Ron Rivest, Adi Shamir and Leonard Adleman published their paper on the "RSA" algorithm, named after their initials, that provides a method for generation of the keys. \cite{RSA1978}\\
+
+The problem of breaking the RSA algorithm is one of finding the prime factors of a large integer. This is difficult to solve for classical computers; the best known algorithm, the general number field sieve (GNFS) \cite{Briggs1998} runs in sub-exponential time, with a time complexity of:
+    \begin{equation*}
+        O\left(\exp\left[\left(\frac{64}{9}\right)^{1/3}(\log n)^{1/3}(\log \log n)^{2/3}\right]\right) 
+    \end{equation*}
+    where $n$ is the number to be factorized. If we were to use an $n$ of $2^{2048}$, we would yield a number of operations roughly $\num{1.53e35}$. On a 5GHz CPU on a single thread, this would take $\num{9.72e17}$ years, a long enough time that the RSA algorithm would be considered secure. \\
+
+    However in 1994, Peter Shor published his quantum algorithm for prime factorization \cite{Shor1994} now known as Shor's Algorithm. Shor suggests that a quantum computer could be able to factorize a number in polynomial time $O(\log n)$. The fastest current implementation is of $O((\log n)^{2}(\log \log n))$ \cite{Beckman1996, HarveyHoeeven2021} yielding a number of operations $\num{1.46e7}$. This is a significant speed up over the GNFS and implies that the RSA algorithm is no longer secure. Among security experts, security through obscurity is not considered a valid form of security, \cite{ScarfoneJansenTracy2008} and as such, the need for further research into quantum computing and quantum-resistant cryptography is clear. Shor's Algorithm is discussed further in section \ref{sec:ShorsAlgorithm}.
+\end{justify}
+\subsubsection{Brute-force Search}
+\begin{justify}
+Brute-force search is a method of problem solving that involves systematically generating and testing all possible solutions to a problem. That is to say, brute-force search find the single item that satisfies some condition in a unsorted database of $n$ items. Once a single item has been examined, its ability to satisfy the condition can be determined in one step and as such, the most efficient classical algorithms may only determine the correct item in $O(n)$ time, averaging $n/2$ operations. \\
+
+In 1996, Lov Grover published his quantum algorithm for database search \cite{Grover1996} now known as Grover's Algorithm. Grover's Algorithm is able to find this single item in only $O(\sqrt{n})$ steps, and although not a polynomial time speed up, it is still a significant speed up over classical algorithms. Grover's Algorithm is possible since, quantum mechanical systems can be in a superposition of states and simultaneously evaluate the conditions for multiple items in the database. \\
+
+A year later in 1997, Grover's Algorithm was shown to be asymptotically optimal by Charles Bennett, Ethan Bernstein, Gilles Brassard and Umesh Vazirani. \cite{BennettBernsteinBrassardVazirani1997} An algorithm is said to be asymptotically optimal if it, for large inputs, performs at worst a constant factor worse than the best possible algorithm.  Grover's Algorithm is discussed further in section \ref{sec:GroversAlgorithm}.
+\end{justify}
+\subsubsection{Simulation of Quantum Systems}
+\begin{justify}
+Can physics be simulated on a classical computer? In 1982, Richard Feynman states that it is certainly not possible to simulate quantum systems on a classical computer without infinite time. \cite{Feynman1982} \\
+
+If we wish to simulate a single particle, $\psi$ as a function of $x$ and $t$, it's probability density can be determined classically using numerical methods. \cite{Schroedinger1926} However, if we wish to simulate $n$ particles, the new state of the system is given by some function $\Psi(x_{1}, x_{2}, \ldots, x_{n}, t)$. Describing all of these states would require a $k$-digit number for every configuration of the system, for every arrangement of the $n$ values of $x$. Then, if there are $N$ points in space and each point in space has it's own information such as electric fields, $n$ is of order $N$, so there would be $N^N$ configurations. Since there are too many variables, it cannot be simulated with a classical computer with a number of elements proportional to $N$. That is to say, computing this classically would require to discretize $x$ and $t$ to make any results exact. To do this requires the discarding of terms that are too small, for example, if we choose to only take $k$ digits of precision, we must discard probabilities that are less than $2^{-k}$. This is not a problem for a small number of particles, but as the number of particles increases to $n$, the more terms we discard, no matter their validity. \\
+
+Feynman presents that descretizing presents some problems, for example taking the electric field at some point below a certain amount, would in turn suggest that it is not there at all. This is not the case, we know it to be quantized. 
+\end{justify}
+\subsection{Quantum Bits and Parallelism}
 \subsection{Quantum Superposition and Entanglement}
 \subsection{The Thermodynamics of Quantum Computing}
 \subsection{Quantum Algorithms}
+\subsubsection{Deutsch's Algorithm}
+\subsubsection{Bernstein-Vazirani Algorithm}
+\subsubsection{Simon's Algorithm}
+\subsubsection{Shor's Algorithm} \label{sec:ShorsAlgorithm}
+\begin{justify}
+The RSA algorithm uses 3 large positive integers, $e$, $d$ and $n$, where $n$ is the product of 2 large prime numbers, $p$ and $q$, and for all integers $m(0 \leq m < n)$, both $(m^{e})^{d}$ and $m$ have the same remainder when divided by $n$. That is to say:
+    \begin{equation}
+        (m^{e})^{d} \equiv m \mod n
+    \end{equation}
+where $n$ and $e$ make up the public key, $d$ is the private key, and $m$ is the message. We can then define the encryption and decryption as follows: 
+    \begin{eqnarray}
+        c &\equiv& m^{e} \mod n \label{eq:RSAencrpyt} \\
+        m &\equiv& c^{d} \mod n
+    \end{eqnarray}
+where $c$ is the cipher text. \\
+
+The RSA algorithm is said to be secure because breaking it requires recovering $m$ such that (\ref{eq:RSAencrpyt}) is true. To do this requires the factorization of $n$ into its prime factors, hence allowing the calculation of $d$ from $e$ and the prime factors of $n$.
+\end{justify}
+\subsubsection{Grover's Algorithm} \label{sec:GroversAlgorithm}
 \subsection{Quantum Error Correction}
 \subsection{Experimental Quantum Computing}
 
-
-
-
+\bibliographystyle{unsrtdin}
+\bibliography{citations}
 \end{document}
