@@ -1,5 +1,6 @@
 \documentclass{amsart}
 \usepackage{amsmath,amssymb,amsthm,amsfonts}
+\usepackage{physics}
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{babel}
@@ -74,6 +75,7 @@ A year later in 1997, Grover's Algorithm was shown to be asymptotically optimal 
 \end{justify}
 \subsubsection{Simulation of Quantum Systems}
 \begin{justify}
+REDO--- \\
 Can physics be simulated on a classical computer? In 1982, Richard Feynman states that it is certainly not possible to simulate quantum systems on a classical computer without infinite time. \cite{Feynman1982} \\
 
 If we wish to simulate a single particle, $\psi$ as a function of $x$ and $t$, it's probability density can be determined classically using numerical methods. \cite{Schroedinger1926} However, if we wish to simulate $n$ particles, the new state of the system is given by some function $\Psi(x_{1}, x_{2}, \ldots, x_{n}, t)$. Describing all of these states would require a $k$-digit number for every configuration of the system, for every arrangement of the $n$ values of $x$. Then, if there are $N$ points in space and each point in space has it's own information such as electric fields, $n$ is of order $N$, so there would be $N^N$ configurations. Since there are too many variables, it cannot be simulated with a classical computer with a number of elements proportional to $N$. That is to say, computing this classically would require to discretize $x$ and $t$ to make any results exact. To do this requires the discarding of terms that are too small, for example, if we choose to only take $k$ digits of precision, we must discard probabilities that are less than $2^{-k}$. This is not a problem for a small number of particles, but as the number of particles increases to $n$, the more terms we discard, no matter their validity. \\
@@ -81,8 +83,24 @@ If we wish to simulate a single particle, $\psi$ as a function of $x$ and $t$, i
 Feynman presents that descretizing presents some problems, for example taking the electric field at some point below a certain amount, would in turn suggest that it is not there at all. This is not the case, we know it to be quantized. By descretizing, we are not simulating the correct equations. \\
 
 This leaves only one option, to simulate quantum systems on a quantum computer. Feynman's conjecture was backed up by Seth Lloyd later in 1996 \cite{Lloyd1996} stating that a mere 30 or 40 qubits would be enough to simulate a quantum simulations of multidimensional fermionic systems like the Hubbard model that prove resistant to conventional computers. \\
+---
 \end{justify}
 \subsection{Quantum Bits and Parallelism}
+\begin{justify}
+    The bit is the smallest building block of information of classical information. Similarly, the qunatum bit or qubit is the equivalent for quantum information theory. \cite{Aaronson2013} While the qubit can be represented by physical systems such as photons, electrons or atoms, for now we will consider the qubit as a abstract concept. \\
+
+While a classical bit has a state of either 0 or 1, qubits similarly have a state of $\ket{0}$ or $\ket{1}$ which correspond to the classical states respectively. There is one key difference however, instead of being exclusively in one state or the other, a qubit can also be in a linear combination of states. That is to say, a qubit can be represented as:
+    \begin{equation}
+        \ket{\psi} = \alpha\ket{0} + \beta\ket{1}
+    \end{equation}
+where $\alpha$ and $\beta$ are complex numbers and $|\alpha|^{2} + |\beta|^{2} = 1$. These states however, are not observable, to retrieve information from a qubit, it must be measured. Doing so we get either 0, with a probability of $|\alpha|^{2}$, or 1, with a probability of $|\beta|^{2}$. An example of this could be for a qubit to be in the following states:
+    \begin{eqnarray}
+        \ket{+} &=& \frac{1}{\sqrt{2}}\ket{0} + \frac{1}{\sqrt{2}}\ket{1} \\
+        \ket{-} &=& \frac{1}{\sqrt{2}}\ket{0} - \frac{1}{\sqrt{2}}\ket{1}
+    \end{eqnarray}
+which we have defined as $\ket{+}$ and $\ket{-}$.
+
+\end{justify}
 \subsection{Quantum Superposition and Entanglement}
 \subsection{The Thermodynamics of Quantum Computing}
 \subsection{Quantum Algorithms}
