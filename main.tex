@@ -1,4 +1,4 @@
-\documentclass{amsart}
+\documentclass[reqno]{amsart}
 \usepackage{amsmath,amssymb,amsthm,amsfonts}
 \usepackage{physics}
 \usepackage{graphicx}
@@ -8,11 +8,14 @@
 \usepackage{datetime}
 \usepackage{ragged2e}
 \usepackage{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{quotes,angles}
 \include{amsartedits}
 \DeclareMathOperator{\lcm}{lcm}
 \newdateformat{monthyeardate}{%
   \monthname[\THEMONTH] \THEYEAR}
 \numberwithin{equation}{section}
+\numberwithin{figure}{section}
 
 \title{Quantum Computing}
 \author[Elliott Ashby]{Elliott Ashby \\ Physics and Astronomy \\ University of Southampton}
@@ -78,32 +81,87 @@ A year later in 1997, Grover's Algorithm was shown to be asymptotically optimal 
 REDO--- \\
 Can physics be simulated on a classical computer? In 1982, Richard Feynman states that it is certainly not possible to simulate quantum systems on a classical computer without infinite time. \cite{Feynman1982} \\
 
-If we wish to simulate a single particle, $\psi$ as a function of $x$ and $t$, it's probability density can be determined classically using numerical methods. \cite{Schroedinger1926} However, if we wish to simulate $n$ particles, the new state of the system is given by some function $\Psi(x_{1}, x_{2}, \ldots, x_{n}, t)$. Describing all of these states would require a $k$-digit number for every configuration of the system, for every arrangement of the $n$ values of $x$. Then, if there are $N$ points in space and each point in space has it's own information such as electric fields, $n$ is of order $N$, so there would be $N^N$ configurations. Since there are too many variables, it cannot be simulated with a classical computer with a number of elements proportional to $N$. That is to say, computing this classically would require to discretize $x$ and $t$ to make any results exact. To do this requires the discarding of terms that are too small, for example, if we choose to only take $k$ digits of precision, we must discard probabilities that are less than $2^{-k}$. This is not a problem for a small number of particles, but as the number of particles increases to $n$, the more terms we discard, no matter their validity. \\
+If we wish to simulate a single particle, $\psi$ as a function of $x$ and $t$, it's probability density can be determined classically using numerical methods. \cite{Schroedinger1926} However, if we wish to simulate $n$ particles, the new state of the system is given by some function $\Psi(x_{1}, x_{2}, \ldots, x_{n}, t)$. Describing all of these states would require a $k$-digit number for every configuration of the system, for every arrangement of the $n$ values of $x$. Then, if there are $N$ points in space and each point in space has it's own information such as electric fields, $n$ is of order $N$, so there would be $N^N$ configurations. Since there are too many variables, it cannot be simulated with a classical computer; there are more variables than estimated atoms in the universe! Computing this classically would require to discretize $x$ and $t$ to make any results exact. To do this requires the discarding of terms that are too small, for example if we choose to only take $k$ digits of precision, we must discard probabilities that are less than $2^{-k}$. This is not a problem for a small number of particles, but as the number of particles increases to $n$, the more terms we discard, no matter their validity. \\
 
-Feynman presents that descretizing presents some problems, for example taking the electric field at some point below a certain amount, would in turn suggest that it is not there at all. This is not the case, we know it to be quantized. By descretizing, we are not simulating the correct equations. \\
+Feynman presents that discretizing presents some problems, for example taking the electric field at some point below a certain amount, would in turn suggest that it is not there at all. This is not the case, we know it to be quantized. By discretizing, we are not simulating the correct equations. \\
 
 This leaves only one option, to simulate quantum systems on a quantum computer. Feynman's conjecture was backed up by Seth Lloyd later in 1996 \cite{Lloyd1996} stating that a mere 30 or 40 qubits would be enough to simulate a quantum simulations of multidimensional fermionic systems like the Hubbard model that prove resistant to conventional computers. \\
 ---
 \end{justify}
-\subsection{Quantum Bits and Parallelism}
+\subsection{Quantum Bits and Superposition}
 \begin{justify}
     The bit is the smallest building block of information of classical information. Similarly, the qunatum bit or qubit is the equivalent for quantum information theory. \cite{Aaronson2013} While the qubit can be represented by physical systems such as photons, electrons or atoms, for now we will consider the qubit as a abstract concept. \\
 
-While a classical bit has a state of either 0 or 1, qubits similarly have a state of $\ket{0}$ or $\ket{1}$ which correspond to the classical states respectively. There is one key difference however, instead of being exclusively in one state or the other, a qubit can also be in a linear combination of states. That is to say, a qubit can be represented as:
+    While a classical bit has a state of either 0 or 1, qubits similarly have a state of $\ket{0}$ or $\ket{1}$ which correspond to the classical states respectively. There is one key difference however, instead of being exclusively in one state or the other, a qubit can also be in a \textit{linear combination} of states also known as a \textit{superposition}. That is to say, a qubit can be represented as:
     \begin{equation}
-        \ket{\psi} = \alpha\ket{0} + \beta\ket{1}
+        \ket{\psi} = \alpha\ket{0} + \beta\ket{1} \label{eq:qubit}
     \end{equation}
 where $\alpha$ and $\beta$ are complex numbers and $|\alpha|^{2} + |\beta|^{2} = 1$. These states however, are not observable, to retrieve information from a qubit, it must be measured. Doing so we get either 0, with a probability of $|\alpha|^{2}$, or 1, with a probability of $|\beta|^{2}$. An example of this could be for a qubit to be in the following states:
     \begin{eqnarray}
         \ket{+} &=& \frac{1}{\sqrt{2}}\ket{0} + \frac{1}{\sqrt{2}}\ket{1} \\
         \ket{-} &=& \frac{1}{\sqrt{2}}\ket{0} - \frac{1}{\sqrt{2}}\ket{1}
     \end{eqnarray}
-which we have defined as $\ket{+}$ and $\ket{-}$.
+which we have denoted as $\ket{+}$ and $\ket{-}$.
 
+If we wish to, we can also represent a single qubit using a \textit{Bloch sphere} \cite{FeynmanRichardVernon1957}; a sphere with radius 1 and the poles representing the 2 states $\ket{0}$ and $\ket{1}$. We can rewrite Equation (\ref{eq:qubit}) as:
+    \begin{equation}
+        \ket{\psi} = \cos\left(\frac{\theta}{2}\right)\ket{0} + e^{i\varphi}\sin\left(\frac{\theta}{2}\right)\ket{1}
+    \end{equation}
+where $\theta$ and $\phi$ are the angles of the Bloch sphere shown in Figure \ref{fig:BlochSphere}. Operations on single qubits can be represented as rotations on the Bloch sphere, which is a useful way to visualize quantum operations. \\
+    \begin{figure}[h]
+        \centering
+        \begin{tikzpicture}
+
+              % Define radius
+              \def\r{3}
+
+              % Bloch vector
+              \draw (0, 0) node[circle, fill, inner sep=1] (orig) {} -- (\r/3, \r/2) node[circle, fill, inner sep=0.7, label=above:$\ket{\psi}$] (phi) {};
+              \draw[dashed] (orig) -- (\r/3, -\r/5) node (phinode) {} -- (phi);
+
+              % Sphere
+              \draw (orig) circle (\r);
+              \draw[dashed] (orig) ellipse (\r{} and \r/3);
+
+              % Axes
+              \draw[->] (orig) -- ++(-\r/5, -\r/3) node[pos=0.9, above left] (x1) {$x$};
+              \draw[->] (orig) -- ++(\r, 0) node[pos=0.9, above] (x2) {$y$};
+              \draw[->] (orig) -- ++(0, \r) node[pos=0.9, left] (x3) {$z$};
+
+              % Angles
+              % \pic["$\phi$", draw=gray, text=gray, ->] {angle = x1--orig--phi};
+              % \pic["$\theta$", draw=gray, text=gray, <-, angle eccentricity=1.4] {angle = a--orig--x3};
+          	  \path (orig) ++(-\r/10, -\r/6) coordinate (phi_start); % Start point for phi
+              \pic [draw=gray, text=gray, ->, "$\varphi$"] {angle = phi_start--orig--phinode};
+              \path (orig) ++(0, \r/2) coordinate (theta_start); % Start point for theta
+              \pic [draw=gray, text=gray, <-, "$\theta$", angle eccentricity=1.4] {angle = phi--orig--theta_start};
+
+              % Kets at poles with nodes
+              \node[circle, fill, inner sep=1] at (0, \r) {}; % North pole node
+              \node[above] at (0, \r) {$|0\rangle$};          % Label for north pole
+              \node[circle, fill, inner sep=1] at (0, -\r) {}; % South pole node
+              \node[below] at (0, -\r) {$|1\rangle$};
+              \draw[dashed] (orig) -- (0, -\r); % Dashed line orig and south pole
+
+        \end{tikzpicture}
+        \caption{The Bloch Sphere}
+        \label{fig:BlochSphere}
+    \end{figure}
+
+    Despite the fact that a single qubit has an infinite number of possible states (all possible values of $\alpha$ and $\beta$), we cannot use a qubit to store an infinite amount of data. This is because in order to extract any information from a qubit it must be measured; measurement results in a collapse from its superposition of $\ket{0}$ and $\ket{1}$ to either 0 or 1. This means that any further measurements are guaranteed to yield the same result. For example, if measurement of $\ket{-}$ gives 1, then any additional measurements must also give 1. \\
 \end{justify}
-\subsection{Quantum Superposition and Entanglement}
+\subsection{Quantum Superposition of Multiple Qubits and Entanglement}
+\begin{justify}
+    Just as a single qubit can be in a superposition of states, multiple qubits can be in a superposition of states. For example, a 2-qubit system can be in a superposition of 4 states:
+    \begin{equation}
+        \ket{\psi} = \alpha_{00}\ket{00} + \alpha_{01}\ket{01} + \alpha_{10}\ket{10} + \alpha_{11}\ket{11}
+    \end{equation}
+    where $\alpha_{00}$, $\alpha_{01}$, $\alpha_{10}$ and $\alpha_{11}$ are complex numbers and $|\alpha_{00}|^{2} + |\alpha_{01}|^{2} + |\alpha_{10}|^{2} + |\alpha_{11}|^{2} = 1$. Similarly to a single qubit, the probability of measuring a state $\ket{xy}$ is $|\alpha_{xy}|^{2}$. However we could potentially only measure one of the two qubits, collapsing that one but not the other. If we measured the first qubit to be 1, then new state of the system would then be:
+    \begin{equation}
+        \ket{\psi'} = \frac{\alpha_{10}\ket{00}+\alpha_{01}\ket{01}}{\sqrt{\abs{\alpha_{10}}^{2} + \abs{\alpha_{11}}^{2}}}
+    \end{equation}
 \subsection{The Thermodynamics of Quantum Computing}
-\subsection{Quantum Algorithms}
+\subsection{Quantum Algorithms and Parallelism}
 \subsubsection{Deutsch's Algorithm}
 \subsubsection{Bernstein-Vazirani Algorithm}
 \subsubsection{Simon's Algorithm}
@@ -120,7 +178,7 @@ where $n$ and $e$ make up the public key, $d$ is the private key, and $m$ is the
     \end{eqnarray}
 where $c$ is the cipher text. \\
 
-The RSA algorithm is said to be secure because breaking it requires recovering $m$ such that (\ref{eq:RSAencrpyt}) is true. To do this requires the factorization of $n$ into its prime factors, hence allowing the calculation of $d$ from $e$ and the prime factors of $n$.
+The RSA algorithm is said to be secure because breaking it requires recovering $m$ such that Equation (\ref{eq:RSAencrpyt}) is true. To do this requires the factorization of $n$ into its prime factors, hence allowing the calculation of $d$ from $e$ and the prime factors of $n$.
 \end{justify}
 \subsubsection{Grover's Algorithm} \label{sec:GroversAlgorithm}
 \subsection{Quantum Error Correction}
