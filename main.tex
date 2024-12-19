@@ -4,11 +4,11 @@
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{babel}
-\usepackage{qcircuit}
 \usepackage{datetime}
 \usepackage{ragged2e}
 \usepackage{siunitx}
 \usepackage{tikz}
+\usepackage{quantikz}
 \usetikzlibrary{quotes,angles}
 \include{amsartedits}
 \DeclareMathOperator{\lcm}{lcm}
@@ -16,7 +16,10 @@
   \monthname[\THEMONTH] \THEYEAR}
 \numberwithin{equation}{section}
 \numberwithin{figure}{section}
-
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
 \title{Quantum Computing}
 \author[Elliott Ashby]{Elliott Ashby \\ Physics and Astronomy \\ University of Southampton}
 \date{\monthyeardate\today}
@@ -37,7 +40,6 @@ The Z3 used electromagnetic relays (600 in the arithmetic unit, 1,400 to store 6
 
 As of 2022 the smallest transistors are of the order of 3nm, \cite{Samsung_2022} but when we shrink further down to 2nm or beyond, we begin to approach the size of the atom; at this scale, quantum effects are more pronounced and the transistor can leak current due to gate direct tunnelling. \cite{2nmGateOxide} These effects limit the effectiveness of classical computers at this scale, and so we must look to new technologies to push the boundaries of computation.
 \end{justify}
-
 \section{An Overview of Key Concepts}
 \subsection{A Brief History of Quantum Computing}
 \begin{justify}
@@ -98,8 +100,8 @@ This leaves only one option, to simulate quantum systems on a quantum computer. 
     \end{equation}
 where $\alpha$ and $\beta$ are complex numbers and $|\alpha|^{2} + |\beta|^{2} = 1$. These states however, are not observable, to retrieve information from a qubit, it must be measured. Doing so we get either 0, with a probability of $|\alpha|^{2}$, or 1, with a probability of $|\beta|^{2}$. An example of this could be for a qubit to be in the following states:
     \begin{eqnarray}
-        \ket{+} &=& \frac{1}{\sqrt{2}}\ket{0} + \frac{1}{\sqrt{2}}\ket{1} \\
-        \ket{-} &=& \frac{1}{\sqrt{2}}\ket{0} - \frac{1}{\sqrt{2}}\ket{1}
+        \ket{+} &=& \frac{1}{\sqrt{2}}\ket{0} + \frac{1}{\sqrt{2}}\ket{1} \label{eqn:+} \\
+        \ket{-} &=& \frac{1}{\sqrt{2}}\ket{0} - \frac{1}{\sqrt{2}}\ket{1} \label{eqn:-}
     \end{eqnarray}
 which we have denoted as $\ket{+}$ and $\ket{-}$.
 
@@ -154,13 +156,236 @@ where $\theta$ and $\phi$ are the angles of the Bloch sphere shown in Figure \re
 \begin{justify}
     Just as a single qubit can be in a superposition of states, multiple qubits can be in a superposition of states. For example, a 2-qubit system can be in a superposition of 4 states:
     \begin{equation}
-        \ket{\psi} = \alpha_{00}\ket{00} + \alpha_{01}\ket{01} + \alpha_{10}\ket{10} + \alpha_{11}\ket{11}
+        \ket{\psi} = \alpha_{00}\ket{00} + \alpha_{01}\ket{01} + \alpha_{10}\ket{10} + \alpha_{11}\ket{11} \label{eq:entanglement}
     \end{equation}
     where $\alpha_{00}$, $\alpha_{01}$, $\alpha_{10}$ and $\alpha_{11}$ are complex numbers and $|\alpha_{00}|^{2} + |\alpha_{01}|^{2} + |\alpha_{10}|^{2} + |\alpha_{11}|^{2} = 1$. Similarly to a single qubit, the probability of measuring a state $\ket{xy}$ is $|\alpha_{xy}|^{2}$. However we could potentially only measure one of the two qubits, collapsing that one but not the other. If we measured the first qubit to be 1, then new state of the system would then be:
     \begin{equation}
         \ket{\psi'} = \frac{\alpha_{10}\ket{00}+\alpha_{01}\ket{01}}{\sqrt{\abs{\alpha_{10}}^{2} + \abs{\alpha_{11}}^{2}}}
     \end{equation}
-\subsection{The Thermodynamics of Quantum Computing}
+    But this raises a strange point, as pointed out by Albert Einstein, Boris Podolsky and Nathan Rosen in 1935 \cite{EinsteinPodolskyRosen1935} that the measurement of one qubit can determine the state of another qubit simultaneously. Einstein Podolsky and Rosen suggested that this was a problem with quantum mechanics, saying that, "No reasonable definition of reality could be expected to permit this." This is known as the \textit{EPR-paradox}. However, later in 1964 John Bell suggested that, using a refinement on the EPR-paradox by David Bohm and Yakir Aharonov \cite{BohmAharonov1957} showing that the EPR-paradox could be tested experimentally, that there "must be a mechanism whereby the setting of one measuring device can influence the reading of another instrument, however remote." \cite{Bell1964} This is known as \textit{quantum entanglement}. From these results we can derive states of equal coefficients and a single measurement from Equation (\ref{eq:entanglement}). These are known as the \textit{Bell states} or \textit{EPR pairs}: 
+        \begin{eqnarray}
+            \ket{\Phi^{+}} &=& \frac{\ket{00} + \ket{11}}{\sqrt{2}} \\
+            \ket{\Phi^{-}} &=& \frac{\ket{00} - \ket{11}}{\sqrt{2}} \\
+            \ket{\Psi^{+}} &=& \frac{\ket{01} + \ket{10}}{\sqrt{2}} \\
+            \ket{\Psi^{-}} &=& \frac{\ket{01} - \ket{10}}{\sqrt{2}}
+        \end{eqnarray}
+They form the \textit{Bell basis} of the four-dimensional Hilbert space for 2 qubits.
+\end{justify}
+\subsection{Quantum Circuits}
+\begin{justify}
+    Classical computers are made of wires and logic gates. Wires move bits around while logic gates manipulate input bits and produce output bits. In order to build a quantum computer, there must be a similar model of computation allowing for input qubits to be converted to output qubits but with one key difference; the quantum computer must be reversible. This is because the laws of quantum mechanics are reversible in time, and as such, any quantum operation must be reversible. These observations were first made by Charles Bennett in 1973 \cite{Bennett1973} and developed further by Edward Fredkin and Tommaso Toffoli as well as Bennett separately in 1982. \cite{FredkinToffoli1982, Bennett1982} Feynman continues this work, discussing possible Hamiltonions for quantum computers in 1986. \cite{Feynman1986} \\
+
+To define a gate classically, we can use a truth table. For example, here are some classical gates and their truth tables:
+    \begin{eqnarray}
+        \begin{array}{c|c}
+            \text{NOT} & \text{AND}\\
+            \hline
+            \begin{array}{c|c}
+                \text{a} & \text{a'} \\
+                \hline
+                0 & 1 \\
+                1 & 0
+            \end{array} &
+            \begin{array}{cc|c}
+                \text{a} & \text{b} & \text{a'} \\
+                \hline
+                0 & 0 & 0 \\
+                0 & 1 & 0 \\
+                1 & 0 & 0 \\
+                1 & 1 & 1
+            \end{array}
+        \end{array}
+    \end{eqnarray}
+    If at a minimum we wish quantum computers to be able to perform the same operations as classical computers, they must be able to perform these 2 operations since they are the minimum required for a Turing complete classical computer (either OR or AND are required). \cite{CopiCohenMcMahon2011} In order to convert these into quantum gates we must make sure that they are reversible, that is to say, for a quantum mechanical system they must be unitary operators. \\
+
+For NOT, we can define the operation as:
+    \begin{equation}
+        \alpha\ket{0} + \beta\ket{1} \rightarrow \alpha\ket{1} + \beta\ket{0}
+    \end{equation}
+if we write the quantum state as:
+    \begin{equation}
+        \begin{bmatrix}
+            \alpha \\
+            \beta
+        \end{bmatrix}
+        \label{eq:qubitmatrix}
+    \end{equation}
+where the top entry is the complex coefficient of $\ket{0}$ and the bottom entry is the complex coefficient of $\ket{1}$. The NOT gate can then be represented as:
+    \begin{equation}
+        X \equiv \begin{bmatrix}
+                    0 & 1 \\
+                    1 & 0
+                \end{bmatrix}
+                \label{eq:NOTmatrix}
+    \end{equation}
+If we apply the NOT gate to the state (\ref{eq:qubitmatrix}), we get:
+    \begin{equation}
+        X\begin{bmatrix}
+            \alpha \\
+            \beta
+        \end{bmatrix} = \begin{bmatrix}
+                            0 & 1 \\
+                            1 & 0
+                        \end{bmatrix}\begin{bmatrix}
+                                        \alpha \\
+                                        \beta
+                                    \end{bmatrix} = \begin{bmatrix}
+                                                        \beta \\
+                                                        \alpha
+                                                    \end{bmatrix}
+    \end{equation}
+which is also easily shown to be unitary. \\
+
+AND however is more tricky. Looking at its truth table, we can see that it is not reversible. An output of $0$ could be the result of three different inputs. However, in 1981 Toffoli published a paper discussing the construction of reversible primitives to create an arbitrary invertible combinatorial function. \cite{Toffoli1981} The three primitives required are: NOT, CONTROLLED NOT (CNOT) and CONTROLLED CONTROLLED NOT (CCNOT). The truth tables for CNOT and CCNOT are:
+    \begin{eqnarray}
+        \begin{array}{c|c}
+            \text{CNOT} & \text{CCNOT} \\
+            \hline
+            \begin{array}{cc|cc}
+                \text{a} & \text{b} & \text{a'} & \text{b'} \\
+                \hline
+                0 & 0 & 0 & 0 \\
+                0 & 1 & 0 & 1 \\
+                1 & 0 & 1 & 1 \\
+                1 & 1 & 1 & 0
+            \end{array} &
+            \begin{array}{ccc|ccc}
+                \text{a} & \text{b} & \text{c} & \text{a'} & \text{b'} & \text{c'} \\
+                \hline
+                0 & 0 & 0 & 0 & 0 & 0 \\
+                0 & 0 & 1 & 0 & 0 & 1 \\
+                0 & 1 & 0 & 0 & 1 & 0 \\
+                0 & 1 & 1 & 0 & 1 & 1 \\
+                1 & 0 & 0 & 1 & 0 & 0 \\
+                1 & 0 & 1 & 1 & 0 & 1 \\
+                1 & 1 & 0 & 1 & 1 & 1 \\
+                1 & 1 & 1 & 1 & 1 & 0 \\
+            \end{array}
+        \end{array}
+    \end{eqnarray}
+Already we can see that using CCNOT, by setting $c = 0$, $c' = 1$ only if $a = b = 1$. This is the AND gate. However, crucially the CCNOT gate is reversible due to the fact that it has a unique output for each input. \\
+
+For CNOT we can define the operation as:
+    \begin{equation}
+        \alpha\ket{00} + \beta\ket{01} + \gamma\ket{10} + \delta\ket{11} \rightarrow \alpha\ket{00} + \beta\ket{01} + \delta\ket{10} + \gamma\ket{11}
+    \end{equation}
+if we write the quantum state as:
+    \begin{equation}
+        \begin{bmatrix}
+            \alpha \\
+            \beta \\
+            \gamma \\
+            \delta
+        \end{bmatrix}
+        \label{eq:2qubitmatrix}
+    \end{equation}
+where the entries are the complex coefficients of $\ket{00}$, $\ket{01}$, $\ket{10}$ and $\ket{11}$ respectively. The CNOT gate can then be represented as:
+    \begin{equation}
+        CNOT \equiv \begin{bmatrix}
+                    1 & 0 & 0 & 0 \\
+                    0 & 1 & 0 & 0 \\
+                    0 & 0 & 0 & 1 \\
+                    0 & 0 & 1 & 0
+                \end{bmatrix}
+    \end{equation}
+
+CCNOT is similar to CNOT, but with an additional control qubit. We can define the operation as:
+    \begin{equation}
+        \begin{split}
+            &\alpha\ket{000} + \beta\ket{001} + \gamma\ket{010} + \delta\ket{011} + \epsilon\ket{100} + \zeta\ket{101} + \eta\ket{110} + \theta\ket{111} \\ \rightarrow
+            &\alpha\ket{000} + \beta\ket{001} + \gamma\ket{010} + \delta\ket{011} + \epsilon\ket{100} + \zeta\ket{101} + \eta\ket{111} + \theta\ket{110}
+        \end{split}
+    \end{equation}
+If we write the quantum state as:
+    \begin{equation}
+        \begin{bmatrix}
+            \alpha \\
+            \beta \\
+            \gamma \\
+            \delta \\
+            \epsilon \\
+            \zeta \\
+            \eta \\
+            \theta
+        \end{bmatrix}
+        \label{eq:3qubitmatrix}
+    \end{equation}
+where the entries are the complex coefficients of $\ket{000}$, $\ket{001}$, $\ket{010}$, $\ket{011}$, $\ket{100}$, $\ket{101}$, $\ket{110}$ and $\ket{111}$ respectively. The CCNOT gate can then be represented as:
+    \begin{equation}
+        CCNOT \equiv \begin{bmatrix}
+                    1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+                    0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+                    0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\
+                    0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 \\
+                    0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\
+                    0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 \\
+                    0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\
+                    0 & 0 & 0 & 0 & 0 & 0 & 1 & 0
+                \end{bmatrix}
+    \end{equation}
+
+While viewing the gates in their matrix forms is useful for tracking the operations each gate makes, a more intuitive way could be to present the gates as circuits more akin to classical computing:
+    \begin{figure}[h]
+        \centering
+        \begin{quantikz}
+            \lstick{$\ket{a}$} & \gate{X} & \rstick{$\ket{a'}$} \qw \\
+            \lstick{$\ket{b}$} & \gate{X} & \rstick{$\ket{b'}$} \qw
+        \end{quantikz}
+        \caption{Circuit for NOT}
+    \end{figure}
+    \begin{figure}[h]
+        \centering
+        \begin{quantikz}
+            \lstick{$\ket{a}$} & \ctrl{1} & \rstick{$\ket{a}$} \qw \\
+            \lstick{$\ket{b}$} & \targ{} & \rstick{$\ket{a, a \oplus b}$} \qw
+        \end{quantikz}
+        \caption{Circuit for CNOT}
+    \end{figure}
+    \begin{figure}[h]
+        \centering
+        \begin{quantikz}
+            \lstick{$\ket{a}$} & \ctrl{1} & \rstick{$\ket{a}$} \qw \\
+            \lstick{$\ket{b}$} & \ctrl{1} & \rstick{$\ket{b}$} \qw \\
+            \lstick{$\ket{c}$} & \targ{} & \rstick{$\ket{a, b, c \oplus (a \land b)}$} \qw
+        \end{quantikz}
+        \caption{Circuit for CCNOT}
+    \end{figure}
+\\
+
+    With these gates, any classical circuit is constructable. For example, the full adder circuit can be constructed using CNOT and CCNOT gates as shown in Figure \ref{fig:FullAdder}.
+    \begin{figure}[h]
+        \centering
+        \begin{quantikz}
+            \lstick{$\ket{A}$} & \ctrl{1} & \ctrl{1} & \qw & \qw & \ctrl{1} & \rstick{$\ket{A}$} \qw \\
+            \lstick{$\ket{B}$} & \ctrl{2} & \targ{} & \ctrl{1} & \ctrl{1} & \targ{} & \rstick{$\ket{B}$} \qw \\
+            \lstick{$\ket{C_{in}}$} & \qw & \qw & \ctrl{1} & \targ{} & \qw & \rstick{$\ket{S}$} \qw \\
+            \lstick{$\ket{0}$} & \targ{} & \qw & \targ{} & \qw & \qw & \rstick{$\ket{C_{out}}$} \qw
+        \end{quantikz}
+        \caption{Circuit for Full Adder where $S$ is the sum and $C_{in/out}$ is the carry in/out}
+        \label{fig:FullAdder}
+    \end{figure}
+\\
+
+However, quantum circuits are not limited to classical circuits; any unitary matrix, a theoretically infinite amount, \cite{Barenco1995} can be used as a quantum logic gate. The most obvious of which, for quantum mechanics would be the Identity and the Pauli matrices, one of which we have already defined in Equation (\ref{eq:NOTmatrix}).
+    \begin{eqnarray}
+        &I& = \begin{bmatrix}
+            1 & 0 \\
+            0 & 1
+        \end{bmatrix} \\
+            X = &\sigma_{x}& = \begin{bmatrix}
+                                0 & 1 \\
+                                1 & 0
+                                \end{bmatrix} \\
+            Y = &\sigma_{y}& = \begin{bmatrix}
+                                0 & -i \\
+                                i & 0
+                                \end{bmatrix} \\
+            Z = &\sigma_{z}& = \begin{bmatrix}
+                                1 & 0 \\
+                                0 & -1
+                                \end{bmatrix}
+    \end{eqnarray}
+\end{justify}
 \subsection{Quantum Algorithms and Parallelism}
 \subsubsection{Deutsch's Algorithm}
 \subsubsection{Bernstein-Vazirani Algorithm}
