@@ -8,9 +8,10 @@
 \usepackage{ragged2e}
 \usepackage{siunitx}
 \usepackage{tikz}
-\usepackage{quantikz}
 \usetikzlibrary{quotes,angles}
+\usepackage{quantikz}
 \include{amsartedits}
+
 \DeclareMathOperator{\lcm}{lcm}
 \newdateformat{monthyeardate}{%
   \monthname[\THEMONTH] \THEYEAR}
@@ -20,6 +21,8 @@
 \emergencystretch=\maxdimen
 \hyphenpenalty=10000
 \hbadness=10000
+\setcounter{tocdepth}{3}
+
 \title{Quantum Computing}
 \author[Elliott Ashby]{Elliott Ashby \\ Physics and Astronomy \\ University of Southampton}
 \date{\monthyeardate\today}
@@ -90,7 +93,7 @@ Feynman presents that discretizing presents some problems, for example taking th
 This leaves only one option, to simulate quantum systems on a quantum computer. Feynman's conjecture was backed up by Seth Lloyd later in 1996 \cite{Lloyd1996} stating that a mere 30 or 40 qubits would be enough to simulate a quantum simulations of multidimensional fermionic systems like the Hubbard model that prove resistant to conventional computers. \\
 ---
 \end{justify}
-\subsection{Quantum Bits and Superposition}
+\subsection{Quantum Bits and Superposition} \label{sec:QubitsandSuperposition}
 \begin{justify}
     The bit is the smallest building block of information of classical information. Similarly, the qunatum bit or qubit is the equivalent for quantum information theory. \cite{Aaronson2013} While the qubit can be represented by physical systems such as photons, electrons or atoms, for now we will consider the qubit as a abstract concept. \\
 
@@ -164,14 +167,15 @@ where $\theta$ and $\phi$ are the angles of the Bloch sphere shown in Figure \re
     \end{equation}
     But this raises a strange point, as pointed out by Albert Einstein, Boris Podolsky and Nathan Rosen in 1935 \cite{EinsteinPodolskyRosen1935} that the measurement of one qubit can determine the state of another qubit simultaneously. Einstein Podolsky and Rosen suggested that this was a problem with quantum mechanics, saying that, "No reasonable definition of reality could be expected to permit this." This is known as the \textit{EPR-paradox}. However, later in 1964 John Bell suggested that, using a refinement on the EPR-paradox by David Bohm and Yakir Aharonov \cite{BohmAharonov1957} showing that the EPR-paradox could be tested experimentally, that there "must be a mechanism whereby the setting of one measuring device can influence the reading of another instrument, however remote." \cite{Bell1964} This is known as \textit{quantum entanglement}. From these results we can derive states of equal coefficients and a single measurement from Equation (\ref{eq:entanglement}). These are known as the \textit{Bell states} or \textit{EPR pairs}: 
         \begin{eqnarray}
-            \ket{\Phi^{+}} &=& \frac{\ket{00} + \ket{11}}{\sqrt{2}} \\
-            \ket{\Phi^{-}} &=& \frac{\ket{00} - \ket{11}}{\sqrt{2}} \\
-            \ket{\Psi^{+}} &=& \frac{\ket{01} + \ket{10}}{\sqrt{2}} \\
-            \ket{\Psi^{-}} &=& \frac{\ket{01} - \ket{10}}{\sqrt{2}}
+            \ket{\Phi^{+}} &=& \frac{\ket{00} + \ket{11}}{\sqrt{2}} \label{eqn:bellphi+} \\
+            \ket{\Phi^{-}} &=& \frac{\ket{00} - \ket{11}}{\sqrt{2}} \label{eqn:bellphi-} \\
+            \ket{\Psi^{+}} &=& \frac{\ket{01} + \ket{10}}{\sqrt{2}} \label{eqn:bellpsi+} \\
+            \ket{\Psi^{-}} &=& \frac{\ket{01} - \ket{10}}{\sqrt{2}} \label{eqn:bellpsi-} 
         \end{eqnarray}
 They form the \textit{Bell basis} of the four-dimensional Hilbert space for 2 qubits.
 \end{justify}
 \subsection{Quantum Circuits}
+\subsubsection{Quantum Gates}
 \begin{justify}
     Classical computers are made of wires and logic gates. Wires move bits around while logic gates manipulate input bits and produce output bits. In order to build a quantum computer, there must be a similar model of computation allowing for input qubits to be converted to output qubits but with one key difference; the quantum computer must be reversible. This is because the laws of quantum mechanics are reversible in time, and as such, any quantum operation must be reversible. These observations were first made by Charles Bennett in 1973 \cite{Bennett1973} and developed further by Edward Fredkin and Tommaso Toffoli as well as Bennett separately in 1982. \cite{FredkinToffoli1982, Bennett1982} Feynman continues this work, discussing possible Hamiltonions for quantum computers in 1986. \cite{Feynman1986} \\
 
@@ -196,7 +200,7 @@ To define a gate classically, we can use a truth table. For example, here are so
             \end{array}
         \end{array}
     \end{eqnarray}
-    If at a minimum we wish quantum computers to be able to perform the same operations as classical computers, they must be able to perform these 2 operations since they are the minimum required for a Turing complete classical computer (either OR or AND are required). \cite{CopiCohenMcMahon2011} In order to convert these into quantum gates we must make sure that they are reversible, that is to say, for a quantum mechanical system they must be unitary operators. \\
+    If at a minimum we wish quantum computers to be able to perform the same operations as classical computers, they must be able to perform these 2 operations since they are the minimum required for a Turing complete classical computer (either OR or AND are required). \cite{CopiCohenMcMahon2011} In order to convert these into quantum gates we must make sure that they are reversible, that is to say, for a quantum mechanical system they must be unitary operators. (An operator $U$ is unitary if $U^{\dagger}U = UU^{\dagger} = I$ and $U^{\dagger} = U^{-1}$ where $I$ is the identity matrix.) \\
 
 For NOT, we can define the operation as:
     \begin{equation}
@@ -324,7 +328,7 @@ where the entries are the complex coefficients of $\ket{000}$, $\ket{001}$, $\ke
                 \end{bmatrix}
     \end{equation}
 
-While viewing the gates in their matrix forms is useful for tracking the operations each gate makes, a more intuitive way could be to present the gates as circuits more akin to classical computing:
+    While viewing the gates in their matrix forms is useful for tracking the operations each gate makes, a more intuitive way could be to present the gates as circuits more akin to classical computing. This can be seen in Figures \ref{fig:NOT}, \ref{fig:CNOT} and \ref{fig:CCNOT}. \\
     \begin{figure}[h]
         \centering
         \begin{quantikz}
@@ -332,6 +336,7 @@ While viewing the gates in their matrix forms is useful for tracking the operati
             \lstick{$\ket{b}$} & \gate{X} & \rstick{$\ket{b'}$} \qw
         \end{quantikz}
         \caption{Circuit for NOT}
+        \label{fig:NOT}
     \end{figure}
     \begin{figure}[h]
         \centering
@@ -340,6 +345,7 @@ While viewing the gates in their matrix forms is useful for tracking the operati
             \lstick{$\ket{b}$} & \targ{} & \rstick{$\ket{a, a \oplus b}$} \qw
         \end{quantikz}
         \caption{Circuit for CNOT}
+        \label{fig:CNOT}
     \end{figure}
     \begin{figure}[h]
         \centering
@@ -349,6 +355,7 @@ While viewing the gates in their matrix forms is useful for tracking the operati
             \lstick{$\ket{c}$} & \targ{} & \rstick{$\ket{a, b, c \oplus (a \land b)}$} \qw
         \end{quantikz}
         \caption{Circuit for CCNOT}
+        \label{fig:CCNOT}
     \end{figure}
 \\
 
@@ -366,28 +373,159 @@ While viewing the gates in their matrix forms is useful for tracking the operati
     \end{figure}
 \\
 
-However, quantum circuits are not limited to classical circuits; any unitary matrix, a theoretically infinite amount, \cite{Barenco1995} can be used as a quantum logic gate. The most obvious of which, for quantum mechanics would be the Identity and the Pauli matrices, one of which we have already defined in Equation (\ref{eq:NOTmatrix}).
+However, quantum circuits are not limited to classical circuits; any unitary matrix, a theoretically infinite amount, \cite{Barenco1995} can be used as a quantum logic gate. The most obvious of which, for quantum mechanics would be the Identity and the Pauli matrices \cite{Pauli1925} which act on a single qubit state, one of which we have already defined in Equation (\ref{eq:NOTmatrix}).
     \begin{eqnarray}
         &I& = \begin{bmatrix}
-            1 & 0 \\
-            0 & 1
-        \end{bmatrix} \\
-            X = &\sigma_{x}& = \begin{bmatrix}
-                                0 & 1 \\
-                                1 & 0
-                                \end{bmatrix} \\
-            Y = &\sigma_{y}& = \begin{bmatrix}
-                                0 & -i \\
-                                i & 0
-                                \end{bmatrix} \\
-            Z = &\sigma_{z}& = \begin{bmatrix}
-                                1 & 0 \\
-                                0 & -1
-                                \end{bmatrix}
+                1 & 0 \\
+                0 & 1
+                \end{bmatrix} \\
+        X = &\sigma_{x}& = \begin{bmatrix}
+                            0 & 1 \\
+                            1 & 0
+                            \end{bmatrix} \\
+        Y = &\sigma_{y}& = \begin{bmatrix}
+                            0 & -i \\
+                            i & 0
+                            \end{bmatrix} \\
+        Z = &\sigma_{z}& = \begin{bmatrix}
+                            1 & 0 \\
+                            0 & -1
+                            \end{bmatrix}
     \end{eqnarray}
+where X is the NOT gate and Y and Z can be visualized as rotations around the Bloch sphere. Y maps $\ket{0}$ to $i\ket{1}$ and $\ket{1}$ to $-i\ket{0}$, while Z maps $\ket{0}$ to $\ket{0}$ and $\ket{1}$ to $-\ket{1}$. Z can be especially useful as it flips the phase of the single qubit state. We could generalize the Z gate to the Phase shift gate:
+    \begin{equation}
+        P(\varphi) = \begin{bmatrix}
+                    1 & 0 \\
+                    0 & e^{i\varphi}
+                    \end{bmatrix}
+    \end{equation}
+and redefine the Z gate as $P(\pi)$. However, $P(\varphi)$ is not Hermitian except for if $\varphi = n\pi, n \in \mathbb{Z}$. This means that it will not corresond to a difference in measurement and purely operates as change of relative phase. \\
+
+We could also generalize the CNOT gate to a CU gate where U is any single qubit gate. This is done by applying the U gate to the target qubit if the control qubit is 1. The CU gate can be represented as:
+    \begin{equation}
+        CU = \begin{bmatrix}
+                I & 0 \\
+                0 & U
+            \end{bmatrix} = \begin{bmatrix}
+                                1 & 0 & 0 & 0 \\
+                                0 & 1 & 0 & 0 \\
+                                0 & 0 & u_{00} & u_{01} \\
+                                0 & 0 & u_{10} & u_{11}
+                            \end{bmatrix}
+    \end{equation}
+where $u_{ij}$ are the elements of the matrix $U$. \\
+
+In Equations (\ref{eqn:+}, \ref{eqn:-}) 2 states were introduced $\ket{+}$ and $\ket{-}$, where the state has an equal chance of collapsing to either $\ket{0}$ or $\ket{1}$. If we wanted to create these states from an input state, say $\ket{0}$ or $\ket{1}$, we could use the following gate:
+    \begin{equation}
+        H = \frac{1}{\sqrt{2}}\begin{bmatrix}
+                                1 & 1 \\
+                                1 & -1
+                            \end{bmatrix}
+    \end{equation}
+    which would map $\ket{0}$ to $\ket{+}$ and $\ket{1}$ to $\ket{-}$. This gate is known as the Hadamard gate after Jaques Hadamard. \cite{Hadamard1893} For example, if we apply the Hadamard gate to $\ket{0}$, we get:
+    \begin{equation}
+        H\ket{0} = \frac{1}{\sqrt{2}}\begin{bmatrix}
+                                        1 & 1 \\
+                                        1 & -1
+                                    \end{bmatrix}\begin{bmatrix}
+                                                    1 \\
+                                                    0
+                                                \end{bmatrix} = \frac{1}{\sqrt{2}}\begin{bmatrix}
+                                                                                    1 \\
+                                                                                    1
+                                                                                \end{bmatrix} = \ket{+}
+    \end{equation}
+Creating a superposition of states is a key part of the power of quantum computing, as it allows for the simultaneous evaluation of multiple states. This will be discussed further in Section \ref{sec:QuantumAlgorithms}. \\
+
+Finally, in order to use any information we have computed, we must measure our quantum states. This can be done by measuring (projecting) the state onto a basis. Since this operation is irreversable, it is not a unitary operation and as such, not a quantum gate; implementations of measurement will depend on the physical system used to implement the quantum computer. Using the visual representation of quantum circuits we can represent measurement as shown in Figure \ref{fig:Measurement}.
+    \begin{figure}[h]
+        \centering
+        \begin{quantikz}
+           & \meter{} &\setwiretype{c}
+        \end{quantikz}
+        \caption{Symbol for measurement of a qubit. The incoming single wire represents that it carries a qubit while the outgoing double wire represents that it carries a classical bit.}
+        \label{fig:Measurement}
+    \end{figure}
 \end{justify}
-\subsection{Quantum Algorithms and Parallelism}
-\subsubsection{Deutsch's Algorithm}
+\subsubsection{Copying a Qubit}
+\begin{justify}
+    Using a classical CNOT gate, it is elementary to copy a single bit; we take in an unknown bit $x$ and a bit initialised to $0$, if $x$ is $0$ then the output is $0$ and if $x$ is $1$ then the output is $1$. Suppose we do the same for a qubit, if our unknown is a state $\ket{\psi} = \alpha\ket{0} + \beta\ket{1}$ and our other bit to be copied to is $\ket{0}$ then our total input state is $\alpha\ket{00} + \beta\ket{10}$. If this is then our input state into a CNOT (Figure \ref{fig:CNOT}), we receive $\alpha\ket{00} + \beta\ket{11}$. This is not a copy of our original state, if we did receive a copy of our original state that was reversible we would find:
+    \begin{equation}
+        \ket{\psi}\ket{\psi} = \alpha^{2}\ket{00} + \alpha\beta\ket{01} + \alpha\beta\ket{10} + \beta^{2}\ket{11}
+    \end{equation}
+but we can see that terms of $\alpha\beta$ are missing. This is known as the \textit{no-cloning theorem} and was first proven by Wootters and Zurek in 1982. \cite{WoottersZurek1982}. \\
+
+Despite not being able to clone a qubit, our output from this operation is still useful. You may notice that it looks similar to out Bell states from Equations (\ref{eqn:bellphi+}, \ref{eqn:bellphi-}, \ref{eqn:bellpsi+}, \ref{eqn:bellpsi-}). In fact, we can make a circuit using Hadamard to create a Bell state from 2 qubits. This is shown in Figure \ref{fig:BellState}.
+    \begin{figure}[h]
+        \begin{eqnarray*}
+            \begin{array}{c|c}
+                \text{Input xy} & \text{Output z} \\ 
+                \hline
+                \ket{00} & \ket{\Phi^{+}} \\
+                \ket{01} & \ket{\Phi^{-}} \\
+                \ket{10} & \ket{\Psi^{+}} \\
+                \ket{11} & \ket{\Psi^{-}}
+            \end{array} \\
+            \begin{quantikz}
+                \lstick{x} & \gate{H} & \ctrl{1} & \rstick[2]{z} \qw \\
+                \lstick{y} & \qw & \targ{} & \rstick{} \qw
+            \end{quantikz}
+        \end{eqnarray*}
+        \caption{Circuit for creating a Bell state}
+        \label{fig:BellState}
+    \end{figure}
+\end{justify}
+\subsection{Quantum Algorithms and Parallelism} \label{sec:QuantumAlgorithms}
+\subsubsection{Deutsch-Jozsa Algorithm}
+\begin{justify}
+    Originally proposed by David Deutsch and Richard Jozsa in 1992 and updated by Richard Cleve, Artur Ekert, Chiara Macchiavello and Michele Mosca in 1998, \cite{DeutschJozsa1992, CleveEkertMacchiavelloMosca1998} the Deutsch-Jozsa algorithm is one of the earliest examples of a quantum algorithm that outperforms its classical counterpart and while it doesnt have much practical use, it clearly shows the parallelism inherent in quantum computing. \\
+
+    The problem that the algorithm aims to solve is as follows: We have a quantum computer ($U_{f}$) of which we have no knowledge of its internal workings. It implements some function $f: \{0, 1\}^{n} \rightarrow \{0, 1\}$ which takes n-bit binarary values as inputs and outputs either a 0 or a 1. Lastly we assume that the function is either constant (always outputs 0 or 1 no matter the input) or balanced (outputs 0 and 1 for half the inputs each). We then wish to determine if the function is constant or balanced. \\
+
+The classical solution to this problem would be to evaluate the function for all possible inputs and if we find that the function is not constant, then it must be balanced. This would require $2^{n-1} + 1$ evaluations of the function. However, the Deutsch-Jozsa algorithm can solve this problem with only 1 evaluation of the function. The algorithm can be seen in Figure \ref{fig:DeutschJozsa}. \\
+    \begin{figure}[h]
+        \centering
+        \begin{quantikz}
+            \lstick{$\ket{0}$} & \qwbundle{n} \slice{$\ket{\Psi_{0}}$} & \gate{H^{\otimes n}} \slice{$\ket{\Psi_{1}}$} & \gate[2][2cm]{U_{f}}\gateinput{$x$}\gateoutput{$x$} \slice{$\ket{\Psi_{2}}$} & \gate{H} \slice{$\ket{\Psi_{3}}$} & \meter{} \\
+            \lstick{$\ket{1}$} & \qw & \gate{H} & \gateinput{$y$}\gateoutput{$y\oplus f(x)$} & \qw & \qw
+        \end{quantikz}
+        \caption{Circuit for the Deutsch-Jozsa algorithm}
+        \label{fig:DeutschJozsa}
+    \end{figure}
+
+Walking though the algorithm step by step:
+    \begin{enumerate}
+        \item Our initial state $\ket{\Psi_{0}}$ is with $n+1$ qubits, $n$ of which are in the state $\ket{0}$ and the last in the state $\ket{1}$. This can also be written as $\ket{0}^{\otimes n}\ket{1}$.
+        \item We then apply the Hadamard gate to all qubits. This gives us the state:
+            \begin{equation*}
+                \ket{\Psi_{1}} = \frac{1}{\sqrt{2^{n+1}}}\sum\limits_{x=0}^{2^{n}-1}\ket{x}\left({\ket{0} - \ket{1}}\right)
+            \end{equation*}
+                Since $x$ runs from 0 to $2^{n}-1$, this is a superposition of all possible inputs.
+        \item We then apply the function $U_{f}$ to the state $\ket{\Psi_{1}}$, mapping input state $\ket{x}\ket{y}$ to $\ket{x}\ket{y \oplus f(x)}$. This gives us the state:
+            \begin{equation*}
+                \ket{\Psi_{2}} = \frac{1}{\sqrt{2^{n+1}}}\sum\limits_{x=0}^{2^{n}-1}\ket{x}\left({\ket{0 \oplus f(x)} - \ket{1 \oplus f(x)}}\right)
+            \end{equation*}
+        \item Since we know that the output of $U_{f}$ is either $0$ or $1$ for any input, so we can rewrite $\ket{\Psi_{2}}$ as 
+            \begin{equation*}
+                \ket{\Psi_{2}} = \frac{1}{\sqrt{2^{n}}}\sum\limits_{x=0}^{2^{n}-1}(-1)^{f(x)}\ket{x}\left(\ket{0} - \ket{1}\right)
+            \end{equation*}
+            And we aren't interested in the last qubit so we can ignore it and rewrite the state as $\ket{k}$:
+            \begin{equation*}
+                \ket{k} = \frac{1}{\sqrt{2^{n}}}\sum\limits_{x=0}^{2^{n}-1}(-1)^{f(x)}\ket{x}
+            \end{equation*}
+        \item We then apply the Hadamard gate to the first $n$ qubits. This gives us the state:
+            \begin{equation*}
+                H^{\otimes n}\ket{k} = \frac{1}{2^{n}}\sum\limits_{x=0}^{2^{n}-1}\sum\limits_{y=0}^{2^{n}-1}(-1)^{f(x)}(-1)^{x \cdot y}\ket{y}
+            \end{equation*}
+        \item Finally, we measure the $n$ qubits:
+            \begin{equation*}
+                \braket{k}{k} = \abs{\frac{1}{2^{n}}\sum\limits_{x=0}^{2^{n}-1}(-1)^{f(x)}(-1)^{x\cdot k}}^{2}
+            \end{equation*}
+            The probability of measuring $\ket{k} = \ket{0}^{\otimes n}$ is 1 if $f(x)$ is constant and 0 if $f(x)$ is balanced. This is because if $f(x)$ is constant, then $(-1)^{f(x)}$ is the same for all $x$ and so the sum is 1. If $f(x)$ is balanced, then $(-1)^{f(x)}$ is opposite for half the $x$ and so the sum balances at 0.
+    \end{enumerate}
+
+As a final note on the Deutsch-Jozsa algorithm, the algorithm known as \textit{Deutsch's algorithm} is a specific case of the Deutsch-Jozsa algorithm where $n = 1$. This simplifies the algorithm to only 2 qubits and is the simplest example of a quantum algorithm that outperforms its classical counterpart.
+\end{justify}
 \subsubsection{Bernstein-Vazirani Algorithm}
 \subsubsection{Simon's Algorithm}
 \subsubsection{Shor's Algorithm} \label{sec:ShorsAlgorithm}
