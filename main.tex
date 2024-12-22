@@ -57,11 +57,11 @@ Since then, quantum computing has continued to grow, with new technologies and g
 
 As of 2024, the quantum computer with the most number of qubits is actually not a superconducting quantum computer, but an atomic array quantum computer built by Atom Computing in 2023 \cite{Atom2023, Atom2024} with a reported 1,180 qubits. However, since atomic array quantum computers are much newer than superconducting quantum computers, they have less general support for quantum algorithms; the largest superconducting quantum computer as of 2024 is IBM's Condor with 1121 qubits. \cite{IBM2023, AbuGhanem2024} \\
 
-The field of quantum computing is still in it's infancy, but with promising results and continued growth, it is likely that quantum computers will become more relevant in the coming years.
+The field of quantum computing is still in its infancy, but with promising results and continued growth, it is likely that quantum computers will become more relevant in the coming years.
 \end{justify}
 
 \subsection{Limitations of Classical Computers and the Need for Quantum Computing}
-\subsubsection{Public-key Cryptography and Factorization of Big Numbers}
+\subsubsection{Public-key Cryptography and Factorization of Big Numbers} \label{sec:PublickeyCryptography}
 \begin{justify}
 In 1976, Whitfield Diffie and Martin Hellman published their paper on new directions in cryptography, \cite{DiffieHellman1976} introducing to the general public the concept of public-key cryptography; a method of encryption that uses a pair of keys, public and private, to encrypt and decrypt messages. With the public key, one can encrypt a message that only the private key can decrypt. 2 years later in 1978, Ron Rivest, Adi Shamir and Leonard Adleman published their paper on the "RSA" algorithm, named after their initials, that provides a method for generation of the keys. \cite{RSA1978}\\
 
@@ -79,19 +79,17 @@ Brute-force search is a method of problem solving that involves systematically g
 
 In 1996, Lov Grover published his quantum algorithm for database search \cite{Grover1996} now known as Grover's Algorithm. Grover's Algorithm is able to find this single item in only $O(\sqrt{n})$ steps, and although not a polynomial time speed up, it is still a significant speed up over classical algorithms. Grover's Algorithm is possible since, quantum mechanical systems can be in a superposition of states and simultaneously evaluate the conditions for multiple items in the database. \\
 
-A year later in 1997, Grover's Algorithm was shown to be asymptotically optimal by Charles Bennett, Ethan Bernstein, Gilles Brassard and Umesh Vazirani. \cite{BennettBernsteinBrassardVazirani1997} An algorithm is said to be asymptotically optimal if it, for large inputs, performs at worst a constant factor worse than the best possible algorithm.  Grover's Algorithm is discussed further in section \ref{sec:GroversAlgorithm}.
+A year later in 1997, Grover's Algorithm was shown to be asymptotically optimal by Charles Bennett, Ethan Bernstein, Gilles Brassard and Umesh Vazirani. \cite{BennettBernsteinBrassardVazirani1997} An algorithm is said to be asymptotically optimal if it, for large inputs, performs at worst a constant factor worse than the best possible algorithm.
 \end{justify}
 \subsubsection{Simulation of Quantum Systems}
 \begin{justify}
-REDO--- \\
 Can physics be simulated on a classical computer? In 1982, Richard Feynman states that it is certainly not possible to simulate quantum systems on a classical computer without infinite time. \cite{Feynman1982} \\
 
-If we wish to simulate a single particle, $\psi$ as a function of $x$ and $t$, it's probability density can be determined classically using numerical methods. \cite{Schroedinger1926} However, if we wish to simulate $n$ particles, the new state of the system is given by some function $\Psi(x_{1}, x_{2}, \ldots, x_{n}, t)$. Describing all of these states would require a $k$-digit number for every configuration of the system, for every arrangement of the $n$ values of $x$. Then, if there are $N$ points in space and each point in space has it's own information such as electric fields, $n$ is of order $N$, so there would be $N^N$ configurations. Since there are too many variables, it cannot be simulated with a classical computer; there are more variables than estimated atoms in the universe! Computing this classically would require to discretize $x$ and $t$ to make any results exact. To do this requires the discarding of terms that are too small, for example if we choose to only take $k$ digits of precision, we must discard probabilities that are less than $2^{-k}$. This is not a problem for a small number of particles, but as the number of particles increases to $n$, the more terms we discard, no matter their validity. \\
+If we wish to simulate a single particle, $\psi$ as a function of $x$ and $t$, its probability density can be determined classically using numerical methods. \cite{Schroedinger1926} However, if we wish to simulate $n$ particles, the new state of the system is given by some function $\Psi(x_{1}, x_{2}, \ldots, x_{n}, t)$. Describing all of these states would require a $k$-digit number for every configuration of the system, for every arrangement of the $n$ values of $x$. Then, if there are $N$ points in space and each point in space has its own information such as electric fields, $n$ is of order $N$, so there would be $N^N$ configurations. Since there are too many variables, it cannot be simulated with a classical computer; there are more variables than estimated atoms in the universe! Computing this classically would require to discretize $x$ and $t$ to make any results exact. To do this requires the discarding of terms that are too small, for example if we choose to only take $k$ digits of precision, we must discard probabilities that are less than $2^{-k}$. This is not a problem for a small number of particles, but as the number of particles increases to $n$, the more terms we discard, no matter their validity. \\
 
-Feynman presents that discretizing presents some problems, for example taking the electric field at some point below a certain amount, would in turn suggest that it is not there at all. This is not the case, we know it to be quantized. By discretizing, we are not simulating the correct equations. \\
+Feynman presents that discretizing presents some problems, for example taking the electric field at some point below a certain amount, would in turn suggest that it is not there at all. This is not the case, we know it to be quantized. By discretizing, we are not simulating the correct equations that reflect reality. \\
 
-This leaves only one option, to simulate quantum systems on a quantum computer. Feynman's conjecture was backed up by Seth Lloyd later in 1996 \cite{Lloyd1996} stating that a mere 30 or 40 qubits would be enough to simulate a quantum simulations of multidimensional fermionic systems like the Hubbard model that prove resistant to conventional computers. \\
----
+This leaves only one option, to simulate quantum systems on a quantum computer. Feynman's conjecture was backed up by Seth Lloyd later in 1996 \cite{Lloyd1996} stating that a mere 30 or 40 qubits would be enough to simulate a quantum simulations of multidimensional fermionic systems like the Hubbard model \cite{Hubbard1963} that prove resistant to conventional computers. \\
 \end{justify}
 \subsection{Quantum Bits and Superposition} \label{sec:QubitsandSuperposition}
 \begin{justify}
@@ -174,8 +172,8 @@ where $\theta$ and $\phi$ are the angles of the Bloch sphere shown in Figure \re
         \end{eqnarray}
 They form the \textit{Bell basis} of the four-dimensional Hilbert space for 2 qubits.
 \end{justify}
-\subsection{Quantum Circuits}
-\subsubsection{Quantum Gates}
+\section{Quantum Circuits}
+\subsection{Quantum Gates}
 \begin{justify}
     Classical computers are made of wires and logic gates. Wires move bits around while logic gates manipulate input bits and produce output bits. In order to build a quantum computer, there must be a similar model of computation allowing for input qubits to be converted to output qubits but with one key difference; the quantum computer must be reversible. This is because the laws of quantum mechanics are reversible in time, and as such, any quantum operation must be reversible. These observations were first made by Charles Bennett in 1973 \cite{Bennett1973} and developed further by Edward Fredkin and Tommaso Toffoli as well as Bennett separately in 1982. \cite{FredkinToffoli1982, Bennett1982} Feynman continues this work, discussing possible Hamiltonions for quantum computers in 1986. \cite{Feynman1986} \\
 
@@ -447,7 +445,7 @@ Finally, in order to use any information we have computed, we must measure our q
         \label{fig:Measurement}
     \end{figure}
 \end{justify}
-\subsubsection{Copying a Qubit}
+\subsection{Copying a Qubit}
 \begin{justify}
     Using a classical CNOT gate, it is elementary to copy a single bit; we take in an unknown bit $x$ and a bit initialised to $0$, if $x$ is $0$ then the output is $0$ and if $x$ is $1$ then the output is $1$. Suppose we do the same for a qubit, if our unknown is a state $\ket{\psi} = \alpha\ket{0} + \beta\ket{1}$ and our other bit to be copied to is $\ket{0}$ then our total input state is $\alpha\ket{00} + \beta\ket{10}$. If this is then our input state into a CNOT (Figure \ref{fig:CNOT}), we receive $\alpha\ket{00} + \beta\ket{11}$. This is not a copy of our original state, if we did receive a copy of our original state that was reversible we would find:
     \begin{equation}
@@ -475,8 +473,8 @@ Despite not being able to clone a qubit, our output from this operation is still
         \label{fig:BellState}
     \end{figure}
 \end{justify}
-\subsection{Quantum Algorithms and Parallelism} \label{sec:QuantumAlgorithms}
-\subsubsection{Deutsch-Jozsa Algorithm}
+\section{Quantum Algorithms and Parallelism} \label{sec:QuantumAlgorithms}
+\subsection{Deutsch-Jozsa Algorithm}
 \begin{justify}
     Originally proposed by David Deutsch and Richard Jozsa in 1992 and updated by Richard Cleve, Artur Ekert, Chiara Macchiavello and Michele Mosca in 1998, \cite{DeutschJozsa1992, CleveEkertMacchiavelloMosca1998} the Deutsch-Jozsa algorithm is one of the earliest examples of a quantum algorithm that outperforms its classical counterpart and while it doesnt have much practical use, it clearly shows the parallelism inherent in quantum computing. \\
 
@@ -496,40 +494,74 @@ The classical solution to this problem would be to evaluate the function for all
 Walking though the algorithm step by step:
     \begin{enumerate}
         \item Our initial state $\ket{\Psi_{0}}$ is with $n+1$ qubits, $n$ of which are in the state $\ket{0}$ and the last in the state $\ket{1}$. This can also be written as $\ket{0}^{\otimes n}\ket{1}$.
+            \begin{equation*}
+                \ket{\Psi_{0}} = \ket{0}^{\otimes n}\ket{1}
+            \end{equation*}
         \item We then apply the Hadamard gate to all qubits. This gives us the state:
             \begin{equation*}
-                \ket{\Psi_{1}} = \frac{1}{\sqrt{2^{n+1}}}\sum\limits_{x=0}^{2^{n}-1}\ket{x}\left({\ket{0} - \ket{1}}\right)
+                \ket{\Psi_{1}} = \sum\limits_{x=0}^{2^{n}-1}\frac{\ket{x}}{\sqrt{2^{n}}}\left[\frac{\ket{0} - \ket{1}}{\sqrt{2}}\right]
             \end{equation*}
-                Since $x$ runs from 0 to $2^{n}-1$, this is a superposition of all possible inputs.
+            which is a superposition of all the $n$-bit strings we want.
         \item We then apply the function $U_{f}$ to the state $\ket{\Psi_{1}}$, mapping input state $\ket{x}\ket{y}$ to $\ket{x}\ket{y \oplus f(x)}$. This gives us the state:
             \begin{equation*}
-                \ket{\Psi_{2}} = \frac{1}{\sqrt{2^{n+1}}}\sum\limits_{x=0}^{2^{n}-1}\ket{x}\left({\ket{0 \oplus f(x)} - \ket{1 \oplus f(x)}}\right)
-            \end{equation*}
-        \item Since we know that the output of $U_{f}$ is either $0$ or $1$ for any input, so we can rewrite $\ket{\Psi_{2}}$ as 
-            \begin{equation*}
-                \ket{\Psi_{2}} = \frac{1}{\sqrt{2^{n}}}\sum\limits_{x=0}^{2^{n}-1}(-1)^{f(x)}\ket{x}\left(\ket{0} - \ket{1}\right)
-            \end{equation*}
-            And we aren't interested in the last qubit so we can ignore it and rewrite the state as $\ket{k}$:
-            \begin{equation*}
-                \ket{k} = \frac{1}{\sqrt{2^{n}}}\sum\limits_{x=0}^{2^{n}-1}(-1)^{f(x)}\ket{x}
+                \ket{\Psi_{2}} = \sum\limits_{x}\frac{(-1)^{f(x)}\ket{x}}{\sqrt{2^{n}}}\left[\frac{\ket{0} - \ket{1}}{\sqrt{2}}\right]
             \end{equation*}
         \item We then apply the Hadamard gate to the first $n$ qubits. This gives us the state:
             \begin{equation*}
-                H^{\otimes n}\ket{k} = \frac{1}{2^{n}}\sum\limits_{x=0}^{2^{n}-1}\sum\limits_{y=0}^{2^{n}-1}(-1)^{f(x)}(-1)^{x \cdot y}\ket{y}
+                \ket{\Psi_{3}} = \sum\limits_{z}\sum\limits_{x}\frac{(-1)^{x \cdot z + f(x)}\ket{z}}{\sqrt{2^{n}}}\left[\frac{\ket{0} - \ket{1}}{\sqrt{2}}\right]
             \end{equation*}
-        \item Finally, we measure the $n$ qubits:
-            \begin{equation*}
-                \braket{k}{k} = \abs{\frac{1}{2^{n}}\sum\limits_{x=0}^{2^{n}-1}(-1)^{f(x)}(-1)^{x\cdot k}}^{2}
-            \end{equation*}
-            The probability of measuring $\ket{k} = \ket{0}^{\otimes n}$ is 1 if $f(x)$ is constant and 0 if $f(x)$ is balanced. This is because if $f(x)$ is constant, then $(-1)^{f(x)}$ is the same for all $x$ and so the sum is 1. If $f(x)$ is balanced, then $(-1)^{f(x)}$ is opposite for half the $x$ and so the sum balances at 0.
+            since for a single qubit $H\ket{x} = \frac{1}{\sqrt{2}}\sum_{z}(-1)^{x \cdot z}\ket{z}$.
+        \item Finally, we measure $\ket{\Psi_{3}}$. In order for the function $f$ to be constant, the state must either be $\ket{0}^{\otimes n}$ or $\ket{1}^{\otimes n}$. In these states, the amplitude of the state is $\frac{1}{2^{n}}\sum_{x}(-1)^{f(x)}$ which will evaulate to either 1 or -1. Since $\ket{\Psi_{3}}$ is normalized, this must be the only possible state in the superposition hence we can conlude that the function is constant.
+
+            However, if the function is balanced, the amplitude of the state $\ket{0}^{\otimes n}$ or $\ket{1}^{\otimes n}$ will be 0 since the negative and positive contributions will cancel. This means that the state must collapse to a state other than all 0s or all 1s. Since we know the function to be either constant or balanced, we can conclude that the function is balanced.
     \end{enumerate}
 
 As a final note on the Deutsch-Jozsa algorithm, the algorithm known as \textit{Deutsch's algorithm} is a specific case of the Deutsch-Jozsa algorithm where $n = 1$. This simplifies the algorithm to only 2 qubits and is the simplest example of a quantum algorithm that outperforms its classical counterpart.
 \end{justify}
-\subsubsection{Bernstein-Vazirani Algorithm}
-\subsubsection{Simon's Algorithm}
-\subsubsection{Shor's Algorithm} \label{sec:ShorsAlgorithm}
+\subsection{Bernstein-Vazirani Algorithm}
 \begin{justify}
+    The Bernstein-Vazirani algorithm is an extension of the Deutsch-Jozsa algorithm and was first proposed by Ethan Bernstein and Umesh Vazirani in 1997. \cite{BernsteinVazirani1997}. The problem is modified so that instead of determining between 2 classes of functions, it instead attempts to find a hidden binary string $s$ of length $n$ encoded in a function. Our new oracle function $U_{f}$ implements the function $f: \{0, 1\}^{n} \rightarrow \{0, 1\}$ where $f(x) = x \cdot s$ and $s \in \{0, 1\}^{n}$. \\
+
+    To compute this classically, we would require $n$ evaluations of the function where we input a string $x$ with only one bit set to 1 in each input, iterating over all possible strings. This would return each bit of the hidden string $s$ like:
+    \begin{equation*}
+        \begin{split}
+            f(1000\ldots0) &= s_{1} \\
+            f(0100\ldots0) &= s_{2} \\
+            \vdots \\
+            f(0000\ldots1) &= s_{n}
+        \end{split}
+    \end{equation*}
+where the bit string $x$ is length $n$. Then the value of s would be $s = s_{1}s_{2}\ldots s_{n}$. \\
+
+However, just like in the Deutsch-Jozsa algorithm, the Bernstein-Vazirani algorithm can solve this with a single evaluation. Figure \ref{fig:BernsteinVazirani} shows the circuit for the algorithm.
+    \begin{figure}[h]
+        \centering
+        \begin{quantikz}
+            \lstick{$\ket{0}$} & \qwbundle{n} \slice{$\ket{\Psi_{0}}$} & \gate{H^{\otimes n}} \slice{$\ket{\Psi_{1}}$} & \gate{U_{f}} \slice{$\ket{\Psi_{2}}$} & \gate{H^{\otimes n}} \slice{$\ket{\Psi_{3}}$} & \meter{}
+        \end{quantikz}
+        \caption{Circuit for the Bernstein-Vazirani algorithm}
+        \label{fig:BernsteinVazirani}
+    \end{figure}
+\begin{enumerate}
+    \item The inital state is $\ket{\Psi_{0}} = \ket{0}^{\otimes n}$. We then apply the Hadamard gate to all qubits to get the state:
+        \begin{equation*}
+            \ket{\Psi_{1}} = \sum\limits_{x=0}^{2^{n}-1}\frac{\ket{x}}{\sqrt{2^{n}}}
+        \end{equation*}
+    \item We then apply the oracle $U_{f}$ which acts like $\ket{x} \rightarrow (-1)^{f(x)}\ket{x}$ to the state $\ket{\Psi_{1}}$ to get the state:
+        \begin{equation*}
+            \ket{\Psi_{2}} = \sum\limits_{x}\frac{(-1)^{f(x)}\ket{x}}{\sqrt{2^{n}}}
+        \end{equation*}
+    \item Currently all qubits are of $\ket{-}$ or $\ket{+}$, so we apply the Hadamard gate again to convert $\ket{-} \rightarrow \ket{1}$ and $\ket{+} \rightarrow \ket{0}$. This gives us the state:
+        \begin{equation*}
+            \ket{\Psi_{3}} = \sum\limits_{z}\sum\limits_{x}\frac{(-1)^{x \cdot z + f(x)}\ket{z}}{\sqrt{2^{n}}} = \ket{s}
+        \end{equation*}
+    \item Finally, we measure the qubits to get the hidden string $s$.
+\end{enumerate}
+\end{justify}
+\subsection{Shor's Algorithm} \label{sec:ShorsAlgorithm}
+\begin{justify}
+    As discussed in Section \ref{sec:PublickeyCryptography}, the security of RSA is based on the difficulty of finding the prime factors of large numbers. Shor's algorithm, proposed by Peter Shor in 1994, is a quantum algorithm that can factorize large numbers in polynomial time. \cite{Shor1994}
+
 The RSA algorithm uses 3 large positive integers, $e$, $d$ and $n$, where $n$ is the product of 2 large prime numbers, $p$ and $q$, and for all integers $m(0 \leq m < n)$, both $(m^{e})^{d}$ and $m$ have the same remainder when divided by $n$. That is to say:
     \begin{equation}
         (m^{e})^{d} \equiv m \mod n
@@ -541,11 +573,45 @@ where $n$ and $e$ make up the public key, $d$ is the private key, and $m$ is the
     \end{eqnarray}
 where $c$ is the cipher text. \\
 
-The RSA algorithm is said to be secure because breaking it requires recovering $m$ such that Equation (\ref{eq:RSAencrpyt}) is true. To do this requires the factorization of $n$ into its prime factors, hence allowing the calculation of $d$ from $e$ and the prime factors of $n$.
+The RSA algorithm is said to be secure because breaking it requires recovering $m$ such that Equation (\ref{eq:RSAencrpyt}) is true. To do this requires the factorization of $n$ into its prime factors, hence allowing the calculation of $d$ from $e$ and the prime factors of $n$. \\
+
+The first observation to make is that, if $n$ is even, then 2 is a factor. This can be done easily using the Euclidean algorithm. \cite{Shallit1994} However, if $n$ is odd, and not a prime power (which we can check efficiently using an algorithm by Bernstein \cite{Bernstein1998}) then we can use Shor's algorithm to factorize $n$. \\
+
+Shor's algorithm is as follows:
+    \begin{enumerate}
+        \item Choose a random number $a$ such that $1 < a < n$.
+        \item Find the greatest common divisor of $a$ and $n$; $K = \text{gcd}(a, n)$.
+        \item If $K \neq 1$, then $K$ must be a non-trivial factor and our second factor is $\frac{n}{K}$.
+        \item If $K = 1$, then $n$ and $a$ are coprime, so $a$ has a multiplicative order (smallest positive integer) $r$ modulo $n$ such that $a^{r} \equiv 1 \mod n$.
+        \item To find $r$ we can use the quantum subroutine in Figure \ref{fig:ShorSubroutine}.
+        \item If $r$ is odd, retry with a different $a$ from step 1.
+        \item If $r$ is even, then we can find the factors of $n$ as $p = \text{gcd}(a^{r/2} + 1, n)$ and (if p is non-trivial) $q = \frac{n}{p}$ where $p$ and $q$ are the prime factors of $n$.
+    \end{enumerate}
+    \begin{figure}[h]
+        \begin{quantikz}
+            \lstick{$\ket{0}$} & \gate{H} & \qw & \qw & \hdots & \ctrl{4} & \gate[4][2cm]{QFT^{\dagger}_{2n}} & \meter{} \\
+            \vdots \\
+            \lstick{$\ket{0}$} & \gate{H} & \qw & \ctrl{2} & \hdots & \qw & \qw & \meter{} \\
+            \lstick{$\ket{0}$} & \gate{H} & \ctrl{1} & \qw & \hdots & \qw & \qw & \meter{} \\
+            \lstick{$\ket{1}$} & \qwbundle{n} & \gate{Ua^{2^0}} & \gate{Ua^{2^1}} & \hdots & \gate{U^{2^{2n-1}}} & \qw
+        \end{quantikz}
+        \caption{Quantum subroutine for Shor's algorithm from Figure 1 in Circuit for Shor's algorithm using $2n+3$ qubits by Stephane Beauregard \cite{Beauregard2003}}
+        \label{fig:ShorSubroutine}
+    \end{figure}
+    Figure \ref{fig:ShorSubroutine} shows the quantum subroutine for Shor's algorithm using $2n+3$ qubits. It uses \textit{quantum phase estimation} \cite{Kitaev1995} on an input state $\ket{0}^{\otimes n}\ket{1}$:
+    \begin{equation}
+        \ket{0}^{\otimes n}\ket{1} \rightarrow \frac{1}{\sqrt{r}}\sum\limits_{j=0}^{r-1}\ket{\phi_{j}}\ket{\psi_{j}}
+    \end{equation}
+    where $\ket{\phi_{j}}$ is the binary representation of $j$ and $\ket{\psi_{j}}$ is an eigenvector of $U$ with eigenvalue $e^{2\pi i \theta}$. If we measure the first register, we have a $1/r$ chance of measuring each $\ket{\phi_{j}}$. Each $\ket{\phi_{j}}$ gives an integer approximation $2^{2n}j/r$. Then, taking our value for $r$, finding $\text{gcd}(a^{r/2} \pm 1, n)$ has a chance to give us the prime factors of $n$ with high probability. \\
+
+    Now we we have $p$ and $q$, we can trivially calculate $d$ as $d = e^{-1} \mod \lambda(n)$ where $\lambda(n) = \text{lcm}(p-1, q-1)$.
 \end{justify}
-\subsubsection{Grover's Algorithm} \label{sec:GroversAlgorithm}
-\subsection{Quantum Error Correction}
-\subsection{Experimental Quantum Computing}
+\section{Quantum Error Correction}
+\section{Experimental Quantum Computing}
+\section{Further Reading}
+\begin{justify}
+\cite{Simon1997}
+\end{justify}
 
 \bibliographystyle{unsrtdin}
 \bibliography{citations}
