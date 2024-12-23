@@ -30,34 +30,33 @@
 
 \begin{document}
 \begin{abstract}
-    Placeholder for abstract.
+    This report provides a high level overview of quantum computing. The history and development during the 20th century are discussed as well as the fundamental principals underpinning quantum computing such as qubits, superposition and entanglement. The report also discusses implementations of quantum computing such as quantum circuits and algorithms as well as the reasoning behind why those algorithms are needed to continue the current pace in the speed up of computation and even simulate physics impossible on a classical computer. Finally, the report discusses the criteria and requirements to build a quantum computer.
 \end{abstract}
 \maketitle
 \tableofcontents
-\newpage
 \section{Introduction}
 \begin{justify}
 Animals gain advantages in many ways, one of which is the exploitation of properties of the physical world. This has come to culmination in humans; in 1941 we saw the creation of the first programmable computer, the Z3, by Konrad Zuse, and in the following decades we have continually perfected this technology. The modern computer that we use today is, at its fundamental principals, identical to the Z3, performing binary operations on "bits" (a 1 or a 0) of data in order to encode useful computational results. \\
 
 The Z3 used electromagnetic relays (600 in the arithmetic unit, 1,400 to store 64 words) and was close in size to the Stibitz BTL Model 1 or a large, floor-to-ceiling bookshelf. \cite{KonradZuseObituary} In the decades following the Z3, the space required to store and operate computer memory has decreased significantly, and as stated by Moore in 1965, "The complexity for minimum component costs has increased at a rate of roughly a factor of two per year." \cite{Moore1965} This has largely held true, thanks to increasingly smaller and smaller manufacturing processes. \\
 
-As of 2022 the smallest transistors are of the order of 3nm, \cite{Samsung_2022} but when we shrink further down to 2nm or beyond, we begin to approach the size of the atom; at this scale, quantum effects are more pronounced and the transistor can leak current due to gate direct tunnelling. \cite{2nmGateOxide} These effects limit the effectiveness of classical computers at this scale, and so we must look to new technologies to push the boundaries of computation.
+As of 2022 the smallest transistors are of the order of 3nm, \cite{Samsung_2022} but when we shrink further down to 2nm or beyond, we begin to approach the size of the atom; at this scale, quantum effects are more pronounced and transistors can leak current due to gate direct tunnelling. \cite{2nmGateOxide} These effects limit the effectiveness of classical computers at this scale, and so we must look to new technologies to push the boundaries of computation.
 \end{justify}
 \section{An Overview of Key Concepts}
 \subsection{A Brief History of Quantum Computing}
 \begin{justify}
-During the majority of the 20th century up until the early 1980s the fields of quantum mechanics and computer science were, for the most part, separate areas of study despite some crossover such as the application of the laser. But in 1980, Paul Benioff proposed a quantum mechanical model of the computer and computation process \cite{Benioff1980} and additionally, in the same year, Yuri Manin proposed a similar model. \cite{Manin1980} In the following years, Richard Feynman wrote a paper suggesting that the use of quantum phenomena to perform computations could be more efficient for computer physics simulations than classical computers. \cite{Feynman1982} \\
-Just 2 years following this, in 1984, Charles Bennett and Gilles Brassard continued to merge quantum mechanics and computer science by introducing quantum cryptography \cite{BennettBrassard1984} showing that a quantum key distribution can be used to secure communications. \\
+During the majority of the 20th century up until the early 1980s the fields of quantum mechanics and computer science were, for the most part, separate areas of study despite some crossover such as the laser. But in 1980, Paul Benioff proposed a quantum mechanical model of the computer and computation process \cite{Benioff1980} and additionally, in the same year, Yuri Manin proposed a similar model. \cite{Manin1980} In the following years, Richard Feynman wrote a paper suggesting that the use of quantum phenomena to perform computations could be more efficient for computer physics simulations than classical computers. \cite{Feynman1982} \\
+2 years later, in 1984, Charles Bennett and Gilles Brassard continued to merge quantum mechanics and computer science by introducing quantum cryptography \cite{BennettBrassard1984} showing that a quantum key distribution can be used to secure communications. \\
 
-Following the proposal of the quantum model of computation, quantum algorithms began to be developed, including Deutsch's algorithm in 1985, \cite{Deutsch1985} the Bernstein-Vazirani algorithm in 1993, \cite{BernsteinVazirani1993} and Simon's algorithm in 1994. \cite{Simon1994} Building on these papers, Peter Shor published his work on prime factorization quantum algorithms which had real world application breaking the RSA and Diffie-Hellman encryption algorithms. \cite{Shor1994} Just 2 years later in 1996, Lov Grover published his algorithm for database search \cite{Grover1996} and in the same year Seth Lloyd finally proved Feynman's conjecture that he proposed in 1982 that quantum computers can be programmed to simulate any local quantum system. \cite{Lloyd1996} \\
+Following the proposal of the quantum model of computation, quantum algorithms began to be developed, including Deutsch's algorithm in 1985, \cite{Deutsch1985} the Bernstein-Vazirani algorithm in 1993, \cite{BernsteinVazirani1993} and Simon's algorithm in 1994. \cite{Simon1994} Building on these papers, Peter Shor published his work on prime factorization quantum algorithms which had real world application breaking the RSA and Diffie-Hellman encryption algorithms. \cite{Shor1994} Just 2 years later in 1996, Lov Grover published his algorithm for database search \cite{Grover1996} and in the same year Seth Lloyd finally proved Feynman's conjecture that he proposed in 1982 that quantum computers (QCs) can be programmed to simulate any local quantum system. \cite{Lloyd1996} \\
 
-The first quantum computer to be built was in 1998; Isaac Chuang and Neil Gershenfeld along with Mark Kubinec implemented Grover's search algorithm with a 2-qubit (the quantum equivalent to bits) nuclear magnetic resonance (NMR) quantum computer. \cite{ChuangGershefeldKubinec1998} In the years following, NMR quantum computers would increase in the number of qubits allowing for a 7-qubit quantum computer to run Shor's algorithm in 2001. \cite{Vandersypen2001} \\
+The first QC to be built was in 1998; Isaac Chuang and Neil Gershenfeld along with Mark Kubinec implemented Grover's search algorithm with a 2-quantum bit (qubit) nuclear magnetic resonance (NMR) QC. \cite{ChuangGershefeldKubinec1998} In the years following, NMR QCs would increase in the number of qubits allowing for a 7-qubit QC to run Shor's algorithm in 2001. \cite{Vandersypen2001} \\
 
 Since then, quantum computing has continued to grow, with new technologies and greater numbers of qubits. The most promising of these is the superconducting circuit used as a qubit. Originally proposed in 1999 by Yasunobu Nakamura, Yuri Pashkin and Jaw-Shen Tsai, \cite{NakamuraPashkinTsai1999} and shown to be viable for greater application in 2007 by Jelle Plantenberg, P.C. de Groot, C.J.P.M. Harmans and Hans Mooij by demonstrating the controlled-NOT gate, \cite{PlantenbergGrootHarmansMooij2007} superconducting qubits have become the focus of many large companies such as IBM and Google. \\
 
-As of 2024, the quantum computer with the most number of qubits is actually not a superconducting quantum computer, but an atomic array quantum computer built by Atom Computing in 2023 \cite{Atom2023, Atom2024} with a reported 1,180 qubits. However, since atomic array quantum computers are much newer than superconducting quantum computers, they have less general support for quantum algorithms; the largest superconducting quantum computer as of 2024 is IBM's Condor with 1121 qubits. \cite{IBM2023, AbuGhanem2024} \\
+As of 2024, the QC with the most number of qubits is actually not a superconducting QC, but an atomic array QC built by Atom Computing in 2023 \cite{Atom2023, Atom2024} with a reported 1,180 qubits. However, since atomic array QCs are much newer than superconducting QCs, they have less general support for quantum algorithms; the largest superconducting QC as of 2024 is IBM's Condor with 1121 qubits. \cite{IBM2023, AbuGhanem2024} \\
 
-The field of quantum computing is still in its infancy, but with promising results and continued growth, it is likely that quantum computers will become more relevant in the coming years.
+The field of quantum computing is still in its infancy, but with promising results and continued growth, it is likely that QCs will become more relevant in the coming years.
 \end{justify}
 
 \subsection{Limitations of Classical Computers and the Need for Quantum Computing}
@@ -71,7 +70,7 @@ The problem of breaking the RSA algorithm is one of finding the prime factors of
     \end{equation*}
     where $n$ is the number to be factorized. If we were to use an $n$ of $2^{2048}$, we would yield a number of operations roughly $\num{1.53e35}$. On a 5GHz CPU on a single thread, this would take $\num{9.72e17}$ years, a long enough time that the RSA algorithm would be considered secure. \\
 
-    However in 1994, Peter Shor published his quantum algorithm for prime factorization \cite{Shor1994} now known as Shor's Algorithm. Shor suggests that a quantum computer could be able to factorize a number in polynomial time $O(\log n)$. The fastest current implementation is of $O((\log n)^{2}(\log \log n))$ \cite{Beckman1996, HarveyHoeeven2021} yielding a number of operations $\num{1.46e7}$. This is a significant speed up over the GNFS and implies that the RSA algorithm is no longer secure. Among security experts, security through obscurity is not considered a valid form of security, \cite{ScarfoneJansenTracy2008} and as such, the need for further research into quantum computing and quantum-resistant cryptography is clear. Shor's Algorithm is discussed further in section \ref{sec:ShorsAlgorithm}.
+    However in 1994, Peter Shor published his quantum algorithm for prime factorization \cite{Shor1994} now known as Shor's Algorithm. Shor suggests that a QC could be able to factorize a number in polynomial time $O(\log n)$. The fastest current implementation is of $O((\log n)^{2}(\log \log n))$ \cite{Beckman1996, HarveyHoeeven2021} yielding a number of operations $\num{1.46e7}$. This is a significant speed up over the GNFS and implies that the RSA algorithm is no longer secure. Among security experts, security through obscurity is not considered a valid form of security, \cite{ScarfoneJansenTracy2008} and as such, the need for further research into quantum computing and quantum-resistant cryptography is clear. Shor's Algorithm is discussed further in section \ref{sec:ShorsAlgorithm}.
 \end{justify}
 \subsubsection{Brute-force Search}
 \begin{justify}
@@ -89,7 +88,7 @@ If we wish to simulate a single particle, $\psi$ as a function of $x$ and $t$, i
 
 Feynman presents that discretizing presents some problems, for example taking the electric field at some point below a certain amount, would in turn suggest that it is not there at all. This is not the case, we know it to be quantized. By discretizing, we are not simulating the correct equations that reflect reality. \\
 
-This leaves only one option, to simulate quantum systems on a quantum computer. Feynman's conjecture was backed up by Seth Lloyd later in 1996 \cite{Lloyd1996} stating that a mere 30 or 40 qubits would be enough to simulate a quantum simulations of multidimensional fermionic systems like the Hubbard model \cite{Hubbard1963} that prove resistant to conventional computers. \\
+This leaves only one option, to simulate quantum systems on a QC. Feynman's conjecture was backed up by Seth Lloyd later in 1996 \cite{Lloyd1996} stating that a mere 30 or 40 qubits would be enough to simulate a quantum simulations of multidimensional fermionic systems like the Hubbard model \cite{Hubbard1963} that prove resistant to conventional computers. \\
 \end{justify}
 \subsection{Quantum Bits and Superposition} \label{sec:QubitsandSuperposition}
 \begin{justify}
@@ -99,10 +98,10 @@ This leaves only one option, to simulate quantum systems on a quantum computer. 
     \begin{equation}
         \ket{\psi} = \alpha\ket{0} + \beta\ket{1} \label{eq:qubit}
     \end{equation}
-where $\alpha$ and $\beta$ are complex numbers and $|\alpha|^{2} + |\beta|^{2} = 1$. These states however, are not observable, to retrieve information from a qubit, it must be measured. Doing so we get either 0, with a probability of $|\alpha|^{2}$, or 1, with a probability of $|\beta|^{2}$. An example of this could be for a qubit to be in the following states:
+where $\alpha$ and $\beta$ are complex numbers and $|\alpha|^{2} + |\beta|^{2} = 1$. These states however, are not observable, to retrieve information from a qubit, it must be measured. Doing so we get either 0 or 1 with a probability of $|\alpha|^{2}$ and $|\beta|^{2}$ respectively. An example of this could be for a qubit to be in the following states:
     \begin{eqnarray}
-        \ket{+} &=& \frac{1}{\sqrt{2}}\ket{0} + \frac{1}{\sqrt{2}}\ket{1} \label{eqn:+} \\
-        \ket{-} &=& \frac{1}{\sqrt{2}}\ket{0} - \frac{1}{\sqrt{2}}\ket{1} \label{eqn:-}
+        \ket{+} &=& \frac{\ket{0} + \ket{1}}{\sqrt{2}} \label{eqn:+} \\
+        \ket{-} &=& \frac{\ket{0} - \ket{1}}{\sqrt{2}} \label{eqn:-}
     \end{eqnarray}
 which we have denoted as $\ket{+}$ and $\ket{-}$.
 
@@ -159,9 +158,9 @@ where $\theta$ and $\phi$ are the angles of the Bloch sphere shown in Figure \re
     \begin{equation}
         \ket{\psi} = \alpha_{00}\ket{00} + \alpha_{01}\ket{01} + \alpha_{10}\ket{10} + \alpha_{11}\ket{11} \label{eq:entanglement}
     \end{equation}
-    where $\alpha_{00}$, $\alpha_{01}$, $\alpha_{10}$ and $\alpha_{11}$ are complex numbers and $|\alpha_{00}|^{2} + |\alpha_{01}|^{2} + |\alpha_{10}|^{2} + |\alpha_{11}|^{2} = 1$. Similarly to a single qubit, the probability of measuring a state $\ket{xy}$ is $|\alpha_{xy}|^{2}$. However we could potentially only measure one of the two qubits, collapsing that one but not the other. If we measured the first qubit to be 1, then new state of the system would then be:
+    where $\alpha_{00}$, $\alpha_{01}$, $\alpha_{10}$ and $\alpha_{11}$ are complex numbers and $|\alpha_{00}|^{2} + |\alpha_{01}|^{2} + |\alpha_{10}|^{2} + |\alpha_{11}|^{2} = 1$. Similarly to a single qubit, the probability of measuring a state $\ket{xy}$ is $|\alpha_{xy}|^{2}$. However we could potentially only measure one of the two qubits, collapsing that one but not the other. If we measured the first qubit to be 1, the new state of the system would then be:
     \begin{equation}
-        \ket{\psi'} = \frac{\alpha_{10}\ket{00}+\alpha_{01}\ket{01}}{\sqrt{\abs{\alpha_{10}}^{2} + \abs{\alpha_{11}}^{2}}}
+        \ket{\psi'} = \frac{\alpha_{10}\ket{10}+\alpha_{11}\ket{11}}{\sqrt{\abs{\alpha_{10}}^{2} + \abs{\alpha_{11}}^{2}}}
     \end{equation}
     But this raises a strange point, as pointed out by Albert Einstein, Boris Podolsky and Nathan Rosen in 1935 \cite{EinsteinPodolskyRosen1935} that the measurement of one qubit can determine the state of another qubit simultaneously. Einstein Podolsky and Rosen suggested that this was a problem with quantum mechanics, saying that, "No reasonable definition of reality could be expected to permit this." This is known as the \textit{EPR-paradox}. However, later in 1964 John Bell suggested that, using a refinement on the EPR-paradox by David Bohm and Yakir Aharonov \cite{BohmAharonov1957} showing that the EPR-paradox could be tested experimentally, that there "must be a mechanism whereby the setting of one measuring device can influence the reading of another instrument, however remote." \cite{Bell1964} This is known as \textit{quantum entanglement}. From these results we can derive states of equal coefficients and a single measurement from Equation (\ref{eq:entanglement}). These are known as the \textit{Bell states} or \textit{EPR pairs}: 
         \begin{eqnarray}
@@ -175,9 +174,9 @@ They form the \textit{Bell basis} of the four-dimensional Hilbert space for 2 qu
 \section{Quantum Circuits}
 \subsection{Quantum Gates}
 \begin{justify}
-    Classical computers are made of wires and logic gates. Wires move bits around while logic gates manipulate input bits and produce output bits. In order to build a quantum computer, there must be a similar model of computation allowing for input qubits to be converted to output qubits but with one key difference; the quantum computer must be reversible. This is because the laws of quantum mechanics are reversible in time, and as such, any quantum operation must be reversible. These observations were first made by Charles Bennett in 1973 \cite{Bennett1973} and developed further by Edward Fredkin and Tommaso Toffoli as well as Bennett separately in 1982. \cite{FredkinToffoli1982, Bennett1982} Feynman continues this work, discussing possible Hamiltonions for quantum computers in 1986. \cite{Feynman1986} \\
+    Classical computers are made of wires and logic gates. Wires move bits around while logic gates manipulate input bits and produce output bits. In order to build a QC, there must be a similar model of computation allowing for input qubits to be converted to output qubits but with one key difference; the QC must be reversible. This is because the laws of quantum mechanics are reversible in time, and as such, any quantum operation must be reversible. These observations were first made by Charles Bennett in 1973 \cite{Bennett1973} and developed further by Edward Fredkin and Tommaso Toffoli as well as Bennett separately in 1982. \cite{FredkinToffoli1982, Bennett1982} Feynman continues this work, discussing possible Hamiltonions for QCs in 1986. \cite{Feynman1986} \\
 
-To define a gate classically, we can use a truth table. For example, here are some classical gates and their truth tables:
+To define a gate classically, we can use a truth table. For example, the truth tables for the NOT and AND gates are:
     \begin{eqnarray}
         \begin{array}{c|c}
             \text{NOT} & \text{AND}\\
@@ -198,13 +197,13 @@ To define a gate classically, we can use a truth table. For example, here are so
             \end{array}
         \end{array}
     \end{eqnarray}
-    If at a minimum we wish quantum computers to be able to perform the same operations as classical computers, they must be able to perform these 2 operations since they are the minimum required for a Turing complete classical computer (either OR or AND are required). \cite{CopiCohenMcMahon2011} In order to convert these into quantum gates we must make sure that they are reversible, that is to say, for a quantum mechanical system they must be unitary operators. (An operator $U$ is unitary if $U^{\dagger}U = UU^{\dagger} = I$ and $U^{\dagger} = U^{-1}$ where $I$ is the identity matrix.) \\
+    If at a minimum we wish QCs to be able to perform the same operations as classical computers, they must be able to perform these 2 operations since they are the minimum required for a Turing complete classical computer (either OR or AND are required). \cite{CopiCohenMcMahon2011} In order to convert these into quantum gates we must make sure that they are reversible, that is to say, for a quantum mechanical system they must be unitary operators. (An operator $U$ is unitary if $U^{\dagger}U = UU^{\dagger} = I$ and $U^{\dagger} = U^{-1}$ where $I$ is the identity matrix.) \\
 
 For NOT, we can define the operation as:
     \begin{equation}
         \alpha\ket{0} + \beta\ket{1} \rightarrow \alpha\ket{1} + \beta\ket{0}
     \end{equation}
-if we write the quantum state as:
+where we can write the state as a column vector of complex coefficients:
     \begin{equation}
         \begin{bmatrix}
             \alpha \\
@@ -271,17 +270,7 @@ For CNOT we can define the operation as:
     \begin{equation}
         \alpha\ket{00} + \beta\ket{01} + \gamma\ket{10} + \delta\ket{11} \rightarrow \alpha\ket{00} + \beta\ket{01} + \delta\ket{10} + \gamma\ket{11}
     \end{equation}
-if we write the quantum state as:
-    \begin{equation}
-        \begin{bmatrix}
-            \alpha \\
-            \beta \\
-            \gamma \\
-            \delta
-        \end{bmatrix}
-        \label{eq:2qubitmatrix}
-    \end{equation}
-where the entries are the complex coefficients of $\ket{00}$, $\ket{01}$, $\ket{10}$ and $\ket{11}$ respectively. The CNOT gate can then be represented as:
+The CNOT gate can then be represented as:
     \begin{equation}
         CNOT \equiv \begin{bmatrix}
                     1 & 0 & 0 & 0 \\
@@ -298,21 +287,7 @@ CCNOT is similar to CNOT, but with an additional control qubit. We can define th
             &\alpha\ket{000} + \beta\ket{001} + \gamma\ket{010} + \delta\ket{011} + \epsilon\ket{100} + \zeta\ket{101} + \eta\ket{111} + \theta\ket{110}
         \end{split}
     \end{equation}
-If we write the quantum state as:
-    \begin{equation}
-        \begin{bmatrix}
-            \alpha \\
-            \beta \\
-            \gamma \\
-            \delta \\
-            \epsilon \\
-            \zeta \\
-            \eta \\
-            \theta
-        \end{bmatrix}
-        \label{eq:3qubitmatrix}
-    \end{equation}
-where the entries are the complex coefficients of $\ket{000}$, $\ket{001}$, $\ket{010}$, $\ket{011}$, $\ket{100}$, $\ket{101}$, $\ket{110}$ and $\ket{111}$ respectively. The CCNOT gate can then be represented as:
+The CCNOT gate can then be represented as:
     \begin{equation}
         CCNOT \equiv \begin{bmatrix}
                     1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
@@ -330,8 +305,7 @@ where the entries are the complex coefficients of $\ket{000}$, $\ket{001}$, $\ke
     \begin{figure}[h]
         \centering
         \begin{quantikz}
-            \lstick{$\ket{a}$} & \gate{X} & \rstick{$\ket{a'}$} \qw \\
-            \lstick{$\ket{b}$} & \gate{X} & \rstick{$\ket{b'}$} \qw
+            \lstick{$\ket{a}$} & \gate{X} & \rstick{$\ket{a'}$} \qw
         \end{quantikz}
         \caption{Circuit for NOT}
         \label{fig:NOT}
@@ -435,7 +409,7 @@ In Equations (\ref{eqn:+}, \ref{eqn:-}) 2 states were introduced $\ket{+}$ and $
     \end{equation}
 Creating a superposition of states is a key part of the power of quantum computing, as it allows for the simultaneous evaluation of multiple states. This will be discussed further in Section \ref{sec:QuantumAlgorithms}. \\
 
-Finally, in order to use any information we have computed, we must measure our quantum states. This can be done by measuring (projecting) the state onto a basis. Since this operation is irreversable, it is not a unitary operation and as such, not a quantum gate; implementations of measurement will depend on the physical system used to implement the quantum computer. Using the visual representation of quantum circuits we can represent measurement as shown in Figure \ref{fig:Measurement}.
+Finally, in order to use any information we have computed, we must measure our quantum states. This can be done by measuring (projecting) the state onto a basis. Since this operation is irreversable, it is not a unitary operation and as such, not a quantum gate; implementations of measurement will depend on the physical system used to implement the QC. Using the visual representation of quantum circuits we can represent measurement as shown in Figure \ref{fig:Measurement}.
     \begin{figure}[h]
         \centering
         \begin{quantikz}
@@ -447,13 +421,17 @@ Finally, in order to use any information we have computed, we must measure our q
 \end{justify}
 \subsection{Copying a Qubit}
 \begin{justify}
-    Using a classical CNOT gate, it is elementary to copy a single bit; we take in an unknown bit $x$ and a bit initialised to $0$, if $x$ is $0$ then the output is $0$ and if $x$ is $1$ then the output is $1$. Suppose we do the same for a qubit, if our unknown is a state $\ket{\psi} = \alpha\ket{0} + \beta\ket{1}$ and our other bit to be copied to is $\ket{0}$ then our total input state is $\alpha\ket{00} + \beta\ket{10}$. If this is then our input state into a CNOT (Figure \ref{fig:CNOT}), we receive $\alpha\ket{00} + \beta\ket{11}$. This is not a copy of our original state, if we did receive a copy of our original state that was reversible we would find:
+    Using a classical CNOT gate, it is elementary to copy a single bit; we take in an unknown bit $x$ and a bit initialised to $0$, if $x$ is $0$ then the output is $0$ and if $x$ is $1$ then the output is $1$. Suppose we do the same with an unknown qubit $\ket{\psi}$ and a qubit $\ket{0}$:
+    \begin{equation}
+        \ket{\psi}\ket{0} = \alpha\ket{00} + \beta\ket{10} \xrightarrow{\text{CNOT}} \alpha\ket{00} + \beta\ket{11} \label{eqn:copy}
+    \end{equation}
+    Therefore we have changed the state of of $\ket{\psi}\ket{0}$ based on the value of $\ket{0}$; we have classically copied information. However, for the general case, where neither qubit is known and the operation must be reversible, a copied qubit would be in the state:
     \begin{equation}
         \ket{\psi}\ket{\psi} = \alpha^{2}\ket{00} + \alpha\beta\ket{01} + \alpha\beta\ket{10} + \beta^{2}\ket{11}
     \end{equation}
-but we can see that terms of $\alpha\beta$ are missing. This is known as the \textit{no-cloning theorem} and was first proven by Wootters and Zurek in 1982. \cite{WoottersZurek1982}. \\
+    where there is an output for every unique input. However, this is not the case for Equation (\ref{eqn:copy}) unless $\alpha\beta=0$; cloning a qubit is not possible. This is known as the \textit{no-cloning theorem} and was first proven by Wootters and Zurek in 1982. \cite{WoottersZurek1982}. \\
 
-Despite not being able to clone a qubit, our output from this operation is still useful. You may notice that it looks similar to out Bell states from Equations (\ref{eqn:bellphi+}, \ref{eqn:bellphi-}, \ref{eqn:bellpsi+}, \ref{eqn:bellpsi-}). In fact, we can make a circuit using Hadamard to create a Bell state from 2 qubits. This is shown in Figure \ref{fig:BellState}.
+    Despite not being able to clone a qubit our output from Equation (\ref{eqn:copy}) is still useful. You may notice that it looks similar to out Bell states from Equations (\ref{eqn:bellphi+}, \ref{eqn:bellphi-}, \ref{eqn:bellpsi+}, \ref{eqn:bellpsi-}). In fact, we can make a circuit using Hadamard to create a Bell state from 2 qubits. This is shown in Figure \ref{fig:BellState}.
     \begin{figure}[h]
         \begin{eqnarray*}
             \begin{array}{c|c}
@@ -478,13 +456,13 @@ Despite not being able to clone a qubit, our output from this operation is still
 \begin{justify}
     Originally proposed by David Deutsch and Richard Jozsa in 1992 and updated by Richard Cleve, Artur Ekert, Chiara Macchiavello and Michele Mosca in 1998, \cite{DeutschJozsa1992, CleveEkertMacchiavelloMosca1998} the Deutsch-Jozsa algorithm is one of the earliest examples of a quantum algorithm that outperforms its classical counterpart and while it doesnt have much practical use, it clearly shows the parallelism inherent in quantum computing. \\
 
-    The problem that the algorithm aims to solve is as follows: We have a quantum computer ($U_{f}$) of which we have no knowledge of its internal workings. It implements some function $f: \{0, 1\}^{n} \rightarrow \{0, 1\}$ which takes n-bit binarary values as inputs and outputs either a 0 or a 1. Lastly we assume that the function is either constant (always outputs 0 or 1 no matter the input) or balanced (outputs 0 and 1 for half the inputs each). We then wish to determine if the function is constant or balanced. \\
+    The problem that the algorithm aims to solve is as follows: We have a QC ($U_{f}$) of which we have no knowledge of its internal workings. It implements some function $f: \{0, 1\}^{n} \rightarrow \{0, 1\}$ which takes n-bit binarary values as inputs and outputs either a 0 or a 1. Lastly we assume that the function is either constant (always outputs 0 or 1 no matter the input) or balanced (outputs 0 and 1 for half the inputs each). We then wish to determine if the function is constant or balanced. \\
 
 The classical solution to this problem would be to evaluate the function for all possible inputs and if we find that the function is not constant, then it must be balanced. This would require $2^{n-1} + 1$ evaluations of the function. However, the Deutsch-Jozsa algorithm can solve this problem with only 1 evaluation of the function. The algorithm can be seen in Figure \ref{fig:DeutschJozsa}. \\
     \begin{figure}[h]
         \centering
         \begin{quantikz}
-            \lstick{$\ket{0}$} & \qwbundle{n} \slice{$\ket{\Psi_{0}}$} & \gate{H^{\otimes n}} \slice{$\ket{\Psi_{1}}$} & \gate[2][2cm]{U_{f}}\gateinput{$x$}\gateoutput{$x$} \slice{$\ket{\Psi_{2}}$} & \gate{H} \slice{$\ket{\Psi_{3}}$} & \meter{} \\
+            \lstick{$\ket{0}$} & \qwbundle{n} \slice{$\ket{\Psi_{0}}$} & \gate{H^{\otimes n}} \slice{$\ket{\Psi_{1}}$} & \gate[2][2cm]{U_{f}}\gateinput{$x$}\gateoutput{$x$} \slice{$\ket{\Psi_{2}}$} & \gate{H^{\otimes n}} \slice{$\ket{\Psi_{3}}$} & \meter{} \\
             \lstick{$\ket{1}$} & \qw & \gate{H} & \gateinput{$y$}\gateoutput{$y\oplus f(x)$} & \qw & \qw
         \end{quantikz}
         \caption{Circuit for the Deutsch-Jozsa algorithm}
@@ -494,22 +472,21 @@ The classical solution to this problem would be to evaluate the function for all
 Walking though the algorithm step by step:
     \begin{enumerate}
         \item Our initial state $\ket{\Psi_{0}}$ is with $n+1$ qubits, $n$ of which are in the state $\ket{0}$ and the last in the state $\ket{1}$. This can also be written as $\ket{0}^{\otimes n}\ket{1}$.
-            \begin{equation*}
+            \begin{equation}
                 \ket{\Psi_{0}} = \ket{0}^{\otimes n}\ket{1}
-            \end{equation*}
-        \item We then apply the Hadamard gate to all qubits. This gives us the state:
-            \begin{equation*}
-                \ket{\Psi_{1}} = \sum\limits_{x=0}^{2^{n}-1}\frac{\ket{x}}{\sqrt{2^{n}}}\left[\frac{\ket{0} - \ket{1}}{\sqrt{2}}\right]
-            \end{equation*}
-            which is a superposition of all the $n$-bit strings we want.
-        \item We then apply the function $U_{f}$ to the state $\ket{\Psi_{1}}$, mapping input state $\ket{x}\ket{y}$ to $\ket{x}\ket{y \oplus f(x)}$. This gives us the state:
-            \begin{equation*}
-                \ket{\Psi_{2}} = \sum\limits_{x}\frac{(-1)^{f(x)}\ket{x}}{\sqrt{2^{n}}}\left[\frac{\ket{0} - \ket{1}}{\sqrt{2}}\right]
-            \end{equation*}
-        \item We then apply the Hadamard gate to the first $n$ qubits. This gives us the state:
-            \begin{equation*}
-                \ket{\Psi_{3}} = \sum\limits_{z}\sum\limits_{x}\frac{(-1)^{x \cdot z + f(x)}\ket{z}}{\sqrt{2^{n}}}\left[\frac{\ket{0} - \ket{1}}{\sqrt{2}}\right]
-            \end{equation*}
+            \end{equation}
+        \item We then apply the Hadamard gate to all qubits:
+            \begin{equation}
+                H\ket{\Psi_{0}} = \ket{\Psi_{1}} = \sum\limits_{x=0}^{2^{n}-1}\frac{\ket{x}}{\sqrt{2^{n}}}\left[\frac{\ket{0} - \ket{1}}{\sqrt{2}}\right]
+            \end{equation}
+        \item We then apply the oracle $U_{f}$ which acts like $\ket{x} \rightarrow (-1)^{f(x)}\ket{x}$:
+            \begin{equation}
+                U_{f}\ket{\Psi_{1}} = \ket{\Psi_{2}} = \sum\limits_{x}\frac{(-1)^{f(x)}\ket{x}}{\sqrt{2^{n}}}\left[\frac{\ket{0} - \ket{1}}{\sqrt{2}}\right]
+            \end{equation}
+        \item We then apply the Hadamard gate to the first $n$ qubits:
+            \begin{equation}
+                \ket{\Psi_{3}} = \sum\limits_{z}\sum\limits_{x}\frac{(-1)^{x \cdot z + f(x)}\ket{z}}{\sqrt{2^{n}}}\left[\frac{\ket{0} - \ket{1}}{\sqrt{2}}\right] \label{eq:finalstate}
+            \end{equation}
             since for a single qubit $H\ket{x} = \frac{1}{\sqrt{2}}\sum_{z}(-1)^{x \cdot z}\ket{z}$.
         \item Finally, we measure $\ket{\Psi_{3}}$. In order for the function $f$ to be constant, the state must either be $\ket{0}^{\otimes n}$ or $\ket{1}^{\otimes n}$. In these states, the amplitude of the state is $\frac{1}{2^{n}}\sum_{x}(-1)^{f(x)}$ which will evaulate to either 1 or -1. Since $\ket{\Psi_{3}}$ is normalized, this must be the only possible state in the superposition hence we can conlude that the function is constant.
 
@@ -542,21 +519,12 @@ However, just like in the Deutsch-Jozsa algorithm, the Bernstein-Vazirani algori
         \caption{Circuit for the Bernstein-Vazirani algorithm}
         \label{fig:BernsteinVazirani}
     \end{figure}
-\begin{enumerate}
-    \item The inital state is $\ket{\Psi_{0}} = \ket{0}^{\otimes n}$. We then apply the Hadamard gate to all qubits to get the state:
-        \begin{equation*}
-            \ket{\Psi_{1}} = \sum\limits_{x=0}^{2^{n}-1}\frac{\ket{x}}{\sqrt{2^{n}}}
-        \end{equation*}
-    \item We then apply the oracle $U_{f}$ which acts like $\ket{x} \rightarrow (-1)^{f(x)}\ket{x}$ to the state $\ket{\Psi_{1}}$ to get the state:
-        \begin{equation*}
-            \ket{\Psi_{2}} = \sum\limits_{x}\frac{(-1)^{f(x)}\ket{x}}{\sqrt{2^{n}}}
-        \end{equation*}
-    \item Currently all qubits are of $\ket{-}$ or $\ket{+}$, so we apply the Hadamard gate again to convert $\ket{-} \rightarrow \ket{1}$ and $\ket{+} \rightarrow \ket{0}$. This gives us the state:
-        \begin{equation*}
-            \ket{\Psi_{3}} = \sum\limits_{z}\sum\limits_{x}\frac{(-1)^{x \cdot z + f(x)}\ket{z}}{\sqrt{2^{n}}} = \ket{s}
-        \end{equation*}
-    \item Finally, we measure the qubits to get the hidden string $s$.
-\end{enumerate}
+
+    Using the result from Equation (\ref{eq:finalstate}) and removing the qubit that was initialised to $\ket{1}$:
+    \begin{equation}
+        \ket{\Psi_{3}} = \sum\limits_{z}\sum\limits_{x}\frac{(-1)^{x \cdot z + f(x)}\ket{z}}{\sqrt{2^{n}}} = \ket{s}
+    \end{equation}
+    where we can measure $\ket{s}$ to find the hidden string $s$.
 \end{justify}
 \subsection{Shor's Algorithm} \label{sec:ShorsAlgorithm}
 \begin{justify}
@@ -598,21 +566,117 @@ Shor's algorithm is as follows:
         \caption{Quantum subroutine for Shor's algorithm from Figure 1 in Circuit for Shor's algorithm using $2n+3$ qubits by Stephane Beauregard \cite{Beauregard2003}}
         \label{fig:ShorSubroutine}
     \end{figure}
-    Figure \ref{fig:ShorSubroutine} shows the quantum subroutine for Shor's algorithm using $2n+3$ qubits. It uses \textit{quantum phase estimation} \cite{Kitaev1995} on an input state $\ket{0}^{\otimes n}\ket{1}$:
+    Figure \ref{fig:ShorSubroutine} shows the quantum subroutine for Shor's algorithm using $2n+3$ qubits. It uses \textit{quantum phase estimation} \cite{Kitaev1995} by a \textit{quantum Fourier transform} [\ref{sec:QFT}] on an input state $\ket{0}^{\otimes n}\ket{1}$:
     \begin{equation}
         \ket{0}^{\otimes n}\ket{1} \rightarrow \frac{1}{\sqrt{r}}\sum\limits_{j=0}^{r-1}\ket{\phi_{j}}\ket{\psi_{j}}
     \end{equation}
-    where $\ket{\phi_{j}}$ is the binary representation of $j$ and $\ket{\psi_{j}}$ is an eigenvector of $U$ with eigenvalue $e^{2\pi i \theta}$. If we measure the first register, we have a $1/r$ chance of measuring each $\ket{\phi_{j}}$. Each $\ket{\phi_{j}}$ gives an integer approximation $2^{2n}j/r$. Then, taking our value for $r$, finding $\text{gcd}(a^{r/2} \pm 1, n)$ has a chance to give us the prime factors of $n$ with high probability. \\
+    where $\ket{\phi_{j}}$ is the binary representation of $j$ and $\ket{\psi_{j}}$ is an eigenvector of $U$ with eigenvalue $e^{2\pi i \theta}$. If we measure the first register, we have a $1/r$ chance of measuring each $\ket{\phi_{j}}$. Measuring each $\ket{\phi_{j}}$ gives an integer approximation $2^{2n}j/r$. \\
 
     Now we we have $p$ and $q$, we can trivially calculate $d$ as $d = e^{-1} \mod \lambda(n)$ where $\lambda(n) = \text{lcm}(p-1, q-1)$.
 \end{justify}
-\section{Quantum Error Correction}
 \section{Experimental Quantum Computing}
-\section{Further Reading}
 \begin{justify}
-\cite{Simon1997}
-\end{justify}
+What are the experimental challenges in building a QC? In 1996 David DiVincenzo proposed a set of criteria that a physical system must meet in order to be considered for a useful QC. \cite{DiVincenzo1996}
 
+The system:
+    \begin{enumerate}
+        \item is scalable and qubits are well characterized.
+        \item can be placed into a fiducial starting quantum state.
+        \item is isolated from the environment so that decoherence times are long.
+        \item must be able to be subjected to a controlled sequence of unitary transformations.
+        \item must be able to be project a state irreversibly into its eigenfunction, determining which orthogonal eigenstate the state is in; the qubit is measurable.
+    \end{enumerate}
+
+    Out of these requirements, Divincenzo suggests that the hardest is (3) while maintaining (4) and (5). For example, NMR QCs have relatively long decoherence times \cite{Bloembergen1948} but since they are isolated, they are insufficiently sensitive to detect the states of individual spins resulting in "weak" measurements where the state is not fully projected. \cite{CoryFahmyHavel1997} \\
+
+There have been many different systems that have been used to implement a QC, each with their own advantages and disadvantages but all must meet the criteria set out by DiVincenzo if they are to provide a useful QC. For an overview of the different systems, see the Figure \ref{fig:ExperimentalImplementations}.
+\end{justify}
+\section{Conclusion}
+\begin{justify}
+    Quantum computing is a growing rapidly thanks to the potential for quantum computers to solve problems impossible for classical computers. Recent advances see larger numbers of qubits finally enabling algorithms such as Shor's algorithm to be used in practice, allowing quantum algorithms, with their inherent parallelism, to outperform classical algorithms. Using the basic building blocks in this report, many more useful applications of quantum computing can be derived; solving optimization problems, simulating quantum systems, data analysis, cybersecurity and more can benefit. \\
+\end{justify}
+\newpage
+\appendix
+\section{\\Additional Information}
+\begin{figure}[h]
+    \begin{tabular}{p{0.13\linewidth}||p{0.19\linewidth}|p{0.17\linewidth}|p{0.19\linewidth}|p{0.18\linewidth}}
+        System & Qubits & Initial State & Unitary Transformations & Measurement \\
+        \hline\hline
+        Optical Photon \cite{KnillLaflammeMilburn2001} & Polarization of photons. & Single photon states (e.g. attenuation of lasers). &  Phase shifters, beam splitters. Couplings via nonlinear Kerr media. & Photo-detectors. \\
+        \hline
+        Ion trap \cite{CiracZoller1995} & Nuclear spin of atom and phonons of trapped atoms. & Cool the atoms into ground state. & Laser pulses externally manipulate the atomic state via the Jaynes-Cummings interaction. Qubits couple with phonon state. & Measure population of hyperfine states. \\
+        \hline
+        NMR \cite{Lloyd1993} & Spin of atomic nucleus. & Polarize spins with strong magnetic field. & Magnetic field pulses manipulate the spins. Couplings are chemical bonds. & Voltage induced by precession of spins. \\
+        \hline
+        Super-conducting qubits \cite{Huang2020} & Charge, flux or phase of superconducting circuits. & Wait for thermalization. & Pulsed microwave signals. Couplings are capacitive. & Electrometer or magnetometer if using flux qubits. \\
+    \end{tabular}
+    \caption{Experimental implementations of quantum computing}
+    \label{fig:ExperimentalImplementations}
+\end{figure}
+\section{\\Quantum Fourier Transform} \label{sec:QFT}
+\begin{justify}
+    The quantum Fourier transform (QFT) is same as the classical discrete Fourier transform but applied to the vector of amplitudes of a quantum state. On a register of $n$ qubits, the vector of amplitudes is of length $N = 2^{n}$.\\
+
+    The classical Fourier transform is defined as:
+    \begin{equation}
+        \hspace*{1.5cm}
+        y_{k} = \frac{1}{\sqrt{N}}\sum\limits_{j=0}^{N-1}x_{j}\omega_{N}^{-jk} \tag{k=0, 1, \ldots, N-1}
+    \end{equation}
+    where $\omega_{N} = e^{2\pi i/N}$ and $x: (x_{0}, x_{1}, \ldots, x_{N-1}) \in \mathbb{C}^{N}$ and $y: (y_{0}, y_{1}, \ldots, y_{N-1}) \in \mathbb{C}^{N}$ are the input and output vectors respectively. Since the classical Fourier transform already acts on a vector, no change is needed to apply it to a quantum state, mapping:
+    \begin{equation}
+        \ket{x} = \sum\limits_{j=0}^{N-1}x_{j}\ket{j} \rightarrow \sum\limits_{k=0}^{N-1}y_{k}\ket{k}
+    \end{equation}
+    where:
+    \begin{equation}
+        \hspace*{1.5cm}
+        y_{k} = \frac{1}{\sqrt{N}}\sum\limits_{j=0}^{N-1}x_{j}\omega_{N}^{jk} \tag{k=0, 1, \ldots, N-1}
+    \end{equation}
+    and $\omega_{N}^{jk}$ is the phase factor. For the QFT the convention is a positive sign. \\
+
+    In the case where $\ket{x}$ is a basis state, the QFT can be expressed as a map of $\ket{x} \rightarrow \ket{k}$:
+    \begin{equation}
+        \text{QFT}\ket{x} \mapsto \frac{1}{\sqrt{N}}\sum\limits_{k=0}^{N-1}\omega_{N}^{xk}\ket{k}
+    \end{equation}
+    which we can write as a unitary matrix:
+    \begin{equation}
+        \text{QFT} = \frac{1}{\sqrt{N}}\begin{bmatrix}
+                                        1 & 1 & 1 & 1 & \ldots & 1 \\
+                                        1 & \omega_{N} & \omega_{N}^{2} & \omega_{N}^{3} & \ldots & \omega_{N}^{N-1} \\
+                                        1 & \omega_{N}^{2} & \omega_{N}^{4} & \omega_{N}^{6} & \ldots & \omega_{N}^{2(N-1)} \\
+                                        1 & \omega_{N}^{3} & \omega_{N}^{6} & \omega_{N}^{9} & \ldots & \omega_{N}^{3(N-1)} \\
+                                        \vdots & \vdots & \vdots & \vdots & \ddots & \vdots \\
+                                        1 & \omega_{N}^{N-1} & \omega_{N}^{2(N-1)} & \omega_{N}^{3(N-1)} & \ldots & \omega_{N}^{(N-1)^{2}}
+                                    \end{bmatrix}
+    \end{equation}
+    
+    To implement the QFT, we can use the circuit shown in Figure \ref{fig:QFT}.
+\end{justify}
+    \begin{figure}[h]
+        \hspace*{-2.5cm}
+        \begin{quantikz}
+            \lstick{$\ket{x_{1}}$} & \gate{H} & \gate{R_{2}} & \gate{R_{3}} & \gate{\hdots} & \gate{R_{n}} & \qw & \qw & \qw & \qw & \qw & \qw & \rstick{$\frac{\ket{0}+\exp{2\pi i[0.x_1\ldots x_n]}\ket{1}}{\sqrt{2}}$} \\
+            \lstick{$\ket{x_{2}}$} & \qw & \ctrl{-1} & \qw & \qw & \qw & \gate{H} & \gate{R_{2}} & \hdots & \qw & \qw & \qw & \rstick{$\frac{\ket{0}+\exp{2\pi i[0.x_2\ldots x_n]}\ket{1}}{\sqrt{2}}$}\\
+            \lstick{$\ket{x_{3}}$} & \qw & \qw & \ctrl{-2} & \qw & \qw & \qw & \ctrl{-1} & \hdots & \qw & \qw & \qw & \rstick{$\frac{\ket{0}+\exp{2\pi i[0.x_3\ldots x_n]}\ket{1}}{\sqrt{2}}$} \\
+            \lstick{$\vdots$} \\
+            \lstick{$\ket{x_{n-1}}$} & \qw & \qw & \qw & \ctrl{-4} & \qw & \qw & \qw  & \hdots & \gate{H} & \gate{R_{2}} & \qw  & \rstick {$\frac{\ket{0}+\exp{2\pi i[0.x_{n-1}x_n]}\ket{1}}{\sqrt{2}}$} \\
+            \lstick{$\ket{x_{n}}$} & \qw & \qw & \qw & \qw & \ctrl{-5} & \qw & \qw & \hdots & \qw & \ctrl{-1} & \gate{H} & \rstick{$\frac{\ket{0}+\exp{2\pi i[0.x_n]}\ket{1}}{\sqrt{2}}$}
+        \end{quantikz}
+        \caption{Circuit for the Quantum Fourier Transform where $R_{k}$ is the controlled rotation gate $R_{k} = \begin{bmatrix} 1 & 0 \\ 0 & e^{2\pi i/2^{k}} \end{bmatrix}$ and the notation $0.x$ is the binary fraction like $0.x_{1}x_{2}\ldots x_{n} = \frac{x_{1}}{2^1} + \frac{x_{2}}{2^2} + \ldots + \frac{x_{n}}{2^{n}}$}
+        \label{fig:QFT}
+    \end{figure}
+\section{\\Further Reading}
+Included here are some further reading suggestions.
+\begin{itemize}
+    \item On the differences of problem class and the increase of theoretic power over the probabilistic Turing Machine \cite{Simon1997}
+    \item On the Travelling Salesman Problem \cite{Goldsmith2024}
+    \item On the role of light based approaches in quantum computing \cite{Walmsley2023}
+    \item On the reduction of errors and inaccuracies \cite{Aharonov1999}
+    \item On the improvement of search algorithms by quantum walk \cite{Magniez2011}
+    \item On the simulation of the evolution of sparse Hamiltonians \cite{Berry2006}
+    \item On the introduction of surface code quantum computing \cite{Fowler2012}
+    \item On the use of simple single-qubit rotations for Hamiltonian simulation \cite{Low2017}
+    \item On the Solovay-Kitaev theorem in order to compile quantum circuits into efficient, fault tolerant circuits \cite{Dawson2005}
+\end{itemize}
 \bibliographystyle{unsrtdin}
 \bibliography{citations}
 \end{document}
