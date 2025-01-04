@@ -2,7 +2,7 @@
 \usepackage{amsmath,amssymb,amsthm,amsfonts}
 \usepackage{physics}
 \usepackage{graphicx}
-\usepackage{hyperref}
+\usepackage[hidelinks]{hyperref}
 \usepackage{babel}
 \usepackage{datetime}
 \usepackage{ragged2e}
@@ -38,17 +38,17 @@
 \begin{justify}
 Animals gain advantages in many ways, one of which is the exploitation of properties of the physical world. This has come to culmination in humans; in 1941 we saw the creation of the first programmable computer, the Z3, by Konrad Zuse, and in the following decades we have continually perfected this technology. The modern computer that we use today is, at its fundamental principals, identical to the Z3, performing binary operations on "bits" (a 1 or a 0) of data in order to encode useful computational results. \\
 
-The Z3 used electromagnetic relays (600 in the arithmetic unit, 1,400 to store 64 words) and was close in size to the Stibitz BTL Model 1 or a large, floor-to-ceiling bookshelf. \cite{KonradZuseObituary} In the decades following the Z3, the space required to store and operate computer memory has decreased significantly, and as stated by Moore in 1965, "The complexity for minimum component costs has increased at a rate of roughly a factor of two per year." \cite{Moore1965} This has largely held true, thanks to increasingly smaller and smaller manufacturing processes. \\
+The Z3 used "electromagnetic relays (600 in the arithmetic unit, 1,400 to store 64 words)" and was "close in size to the Stibitz BTL Model 1" or a large, floor-to-ceiling bookshelf. \cite{KonradZuseObituary} In the decades following the Z3, the space required to store and operate computer memory has decreased significantly, and as stated by Moore in 1965, "The complexity for minimum component costs has increased at a rate of roughly a factor of two per year." \cite{Moore1965} This has largely held true, thanks to increasingly smaller and smaller manufacturing processes. \\
 
 As of 2022 the smallest transistors are of the order of 3nm, \cite{Samsung_2022} but when we shrink further down to 2nm or beyond, we begin to approach the size of the atom; at this scale, quantum effects are more pronounced and transistors can leak current due to gate direct tunnelling. \cite{2nmGateOxide} These effects limit the effectiveness of classical computers at this scale, and so we must look to new technologies to push the boundaries of computation.
 \end{justify}
 \section{An Overview of Key Concepts}
-\subsection{A Brief History of Quantum Computing}
+\subsection{A History of Quantum Computing}
 \begin{justify}
 During the majority of the 20th century up until the early 1980s the fields of quantum mechanics and computer science were, for the most part, separate areas of study despite some crossover such as the laser. But in 1980, Paul Benioff proposed a quantum mechanical model of the computer and computation process \cite{Benioff1980} and additionally, in the same year, Yuri Manin proposed a similar model. \cite{Manin1980} In the following years, Richard Feynman wrote a paper suggesting that the use of quantum phenomena to perform computations could be more efficient for computer physics simulations than classical computers. \cite{Feynman1982} \\
 2 years later, in 1984, Charles Bennett and Gilles Brassard continued to merge quantum mechanics and computer science by introducing quantum cryptography \cite{BennettBrassard1984} showing that a quantum key distribution can be used to secure communications. \\
 
-Following the proposal of the quantum model of computation, quantum algorithms began to be developed, including Deutsch's algorithm in 1985, \cite{Deutsch1985} the Bernstein-Vazirani algorithm in 1993, \cite{BernsteinVazirani1993} and Simon's algorithm in 1994. \cite{Simon1994} Building on these papers, Peter Shor published his work on prime factorization quantum algorithms which had real world application breaking the RSA and Diffie-Hellman encryption algorithms. \cite{Shor1994} Just 2 years later in 1996, Lov Grover published his algorithm for database search \cite{Grover1996} and in the same year Seth Lloyd finally proved Feynman's conjecture that he proposed in 1982 that quantum computers (QCs) can be programmed to simulate any local quantum system. \cite{Lloyd1996} \\
+Following the proposal of the quantum model of computation, quantum algorithms began to be developed, including Deutsch's algorithm in 1985, \cite{Deutsch1985} the Bernstein-Vazirani algorithm in 1993, \cite{BernsteinVazirani1993} and Simon's algorithm in 1994. \cite{Simon1994} Building on these papers, Peter Shor published his work on prime factorization quantum algorithms which had real world application breaking the RSA and Diffie-Hellman encryption algorithms. \cite{Shor1994} Just 2 years later in 1996, Lov Grover published his algorithm for database search \cite{Grover1996} and in the same year Seth Lloyd finally proved Feynman's conjecture that he proposed in 1982 that quantum computers (QCs) "can be programmed to simulate any local quantum system". \cite{Lloyd1996} \\
 
 The first QC to be built was in 1998; Isaac Chuang and Neil Gershenfeld along with Mark Kubinec implemented Grover's search algorithm with a 2-quantum bit (qubit) nuclear magnetic resonance (NMR) QC. \cite{ChuangGershefeldKubinec1998} In the years following, NMR QCs would increase in the number of qubits allowing for a 7-qubit QC to run Shor's algorithm in 2001. \cite{Vandersypen2001} \\
 
@@ -74,17 +74,17 @@ The problem of breaking the RSA algorithm is one of finding the prime factors of
 \end{justify}
 \subsubsection{Brute-force Search}
 \begin{justify}
-Brute-force search is a method of problem solving that involves systematically generating and testing all possible solutions to a problem. That is to say, brute-force search find the single item that satisfies some condition in a unsorted database of $n$ items. Once a single item has been examined, its ability to satisfy the condition can be determined in one step and as such, the most efficient classical algorithms may only determine the correct item in $O(n)$ time, averaging $n/2$ operations. \\
+Brute-force search systematically generates and tests all potential solutions to a problem. That is to say, brute-force search find the single item that satisfies some condition in a unsorted database of $n$ items. Once a single item has been examined, its ability to satisfy the condition can be determined in one step and as such, the most efficient classical algorithms may only determine the correct item in $O(n)$ time, averaging $n/2$ operations. \\
 
-In 1996, Lov Grover published his quantum algorithm for database search \cite{Grover1996} now known as Grover's Algorithm. Grover's Algorithm is able to find this single item in only $O(\sqrt{n})$ steps, and although not a polynomial time speed up, it is still a significant speed up over classical algorithms. Grover's Algorithm is possible since, quantum mechanical systems can be in a superposition of states and simultaneously evaluate the conditions for multiple items in the database. \\
+In 1996, Lov Grover published his quantum algorithm for database search \cite{Grover1996} now known as Grover's Algorithm. Grover's Algorithm is able to find this single item in only $O(\sqrt{n})$ steps, and although not a polynomial time speed up, it is still a great increase in speed over classical algorithms. Grover's Algorithm is possible since, quantum mechanical systems can be in a superposition of states and simultaneously evaluate the conditions for multiple items in the database. \\
 
-A year later in 1997, Grover's Algorithm was shown to be asymptotically optimal by Charles Bennett, Ethan Bernstein, Gilles Brassard and Umesh Vazirani. \cite{BennettBernsteinBrassardVazirani1997} An algorithm is said to be asymptotically optimal if it, for large inputs, performs at worst a constant factor worse than the best possible algorithm.
+A year later in 1997, Grover's Algorithm was shown to be asymptotically optimal by Charles Bennett, Ethan Bernstein, Gilles Brassard and Umesh Vazirani. \cite{BennettBernsteinBrassardVazirani1997} An algorithm can be called asymptotically optimal if performs at worst a constant factor worse than the best possible algorithm for large inputs.
 \end{justify}
 \subsubsection{Simulation of Quantum Systems}
 \begin{justify}
-Can physics be simulated on a classical computer? In 1982, Richard Feynman states that it is certainly not possible to simulate quantum systems on a classical computer without infinite time. \cite{Feynman1982} \\
+Can physics be simulated on a classical computer? In 1982, Richard Feynman states that it is definitely impossible to simulate quantum systems on a classical computer without infinite time. \cite{Feynman1982} \\
 
-If we wish to simulate a single particle, $\psi$ as a function of $x$ and $t$, its probability density can be determined classically using numerical methods. \cite{Schroedinger1926} However, if we wish to simulate $n$ particles, the new state of the system is given by some function $\Psi(x_{1}, x_{2}, \ldots, x_{n}, t)$. Describing all of these states would require a $k$-digit number for every configuration of the system, for every arrangement of the $n$ values of $x$. Then, if there are $N$ points in space and each point in space has its own information such as electric fields, $n$ is of order $N$, so there would be $N^N$ configurations. Since there are too many variables, it cannot be simulated with a classical computer; there are more variables than estimated atoms in the universe! Computing this classically would require to discretize $x$ and $t$ to make any results exact. To do this requires the discarding of terms that are too small, for example if we choose to only take $k$ digits of precision, we must discard probabilities that are less than $2^{-k}$. This is not a problem for a small number of particles, but as the number of particles increases to $n$, the more terms we discard, no matter their validity. \\
+If we wish to simulate a single particle, $\psi$ as a function of $x$ and $t$, its probability density can be determined classically using numerical methods. \cite{Schroedinger1926} However, if we wish to simulate $n$ particles, the new state of the system is given by some function $\Psi(x_{1}, x_{2}, \ldots, x_{n}, t)$. Describing all of these states would require a "$k$-digit number for every configuration of the system, for every arrangement of the [$n$] values of $x$". Then, if there are $N$ points in space and each point in space has its own information such as electric fields, $n$ is of order $N$, so there would be $N^N$ configurations. Since there are too many variables, it cannot be simulated with a classical computer; there are more variables than estimated atoms in the universe! Computing this classically would require to discretize $x$ and $t$ to make any results exact. To do this requires the discarding of terms that are too small, for example if we choose to only take $k$ digits of precision, we must discard probabilities that are less than $2^{-k}$. This is not a problem for a small number of particles, but as the number of particles increases to $n$, the more terms we discard, no matter their validity. \\
 
 Feynman presents that discretizing presents some problems, for example taking the electric field at some point below a certain amount, would in turn suggest that it is not there at all. This is not the case, we know it to be quantized. By discretizing, we are not simulating the correct equations that reflect reality. \\
 
@@ -109,7 +109,7 @@ If we wish to, we can also represent a single qubit using a \textit{Bloch sphere
     \begin{equation}
         \ket{\psi} = \cos\left(\frac{\theta}{2}\right)\ket{0} + e^{i\varphi}\sin\left(\frac{\theta}{2}\right)\ket{1}
     \end{equation}
-where $\theta$ and $\phi$ are the angles of the Bloch sphere shown in Figure \ref{fig:BlochSphere}. Operations on single qubits can be represented as rotations on the Bloch sphere, which is a useful way to visualize quantum operations. \\
+where $\theta$ and $\phi$ are the angles of the Bloch sphere shown in Figure \ref{fig:BlochSphere}. Operations on single qubits can be shown as rotations on the surface of the Bloch sphere, which is a useful way to visualize quantum operations. \\
     \begin{figure}[h]
         \centering
         \begin{tikzpicture}
@@ -150,7 +150,7 @@ where $\theta$ and $\phi$ are the angles of the Bloch sphere shown in Figure \re
         \label{fig:BlochSphere}
     \end{figure}
 
-    Despite the fact that a single qubit has an infinite number of possible states (all possible values of $\alpha$ and $\beta$), we cannot use a qubit to store an infinite amount of data. This is because in order to extract any information from a qubit it must be measured; measurement results in a collapse from its superposition of $\ket{0}$ and $\ket{1}$ to either 0 or 1. This means that any further measurements are guaranteed to yield the same result. For example, if measurement of $\ket{-}$ gives 1, then any additional measurements must also give 1. \\
+    Despite the fact that a single qubit has an infinite number of possible states (all possible values of $\alpha$ and $\beta$), we cannot use a qubit to store any amount of data. This is because in order to extract information from a qubit it must be measured; measurement results in a collapse from its superposition of $\ket{0}$ and $\ket{1}$ to either 0 or 1. This means that any further measurements are guaranteed to yield the same result. For example, if measurement of $\ket{-}$ gives 1, then any additional measurements must also give 1. \\
 \end{justify}
 \subsection{Quantum Superposition of Multiple Qubits and Entanglement}
 \begin{justify}
@@ -407,7 +407,7 @@ In Equations (\ref{eqn:+}, \ref{eqn:-}) 2 states were introduced $\ket{+}$ and $
                                                                                     1
                                                                                 \end{bmatrix} = \ket{+}
     \end{equation}
-Creating a superposition of states is a key part of the power of quantum computing, as it allows for the simultaneous evaluation of multiple states. This will be discussed further in Section \ref{sec:QuantumAlgorithms}. \\
+Creating a superposition of states is a key part of the power of quantum computing because multiple states can then be simultaneously evaluated. This will be discussed further in Section \ref{sec:QuantumAlgorithms}. \\
 
 Finally, in order to use any information we have computed, we must measure our quantum states. This can be done by measuring (projecting) the state onto a basis. Since this operation is irreversable, it is not a unitary operation and as such, not a quantum gate; implementations of measurement will depend on the physical system used to implement the QC. Using the visual representation of quantum circuits we can represent measurement as shown in Figure \ref{fig:Measurement}.
     \begin{figure}[h]
@@ -493,7 +493,7 @@ Walking though the algorithm step by step:
             However, if the function is balanced, the amplitude of the state $\ket{0}^{\otimes n}$ or $\ket{1}^{\otimes n}$ will be 0 since the negative and positive contributions will cancel. This means that the state must collapse to a state other than all 0s or all 1s. Since we know the function to be either constant or balanced, we can conclude that the function is balanced.
     \end{enumerate}
 
-As a final note on the Deutsch-Jozsa algorithm, the algorithm known as \textit{Deutsch's algorithm} is a specific case of the Deutsch-Jozsa algorithm where $n = 1$. This simplifies the algorithm to only 2 qubits and is the simplest example of a quantum algorithm that outperforms its classical counterpart.
+As a final note on the Deutsch-Jozsa algorithm, the algorithm known as \textit{Deutsch's algorithm} is a specific case of the Deutsch-Jozsa algorithm where $n = 1$. This simplifies the algorithm to only 2 qubits and is an example of a quantum algorithm that performs better than its classical counterpart.
 \end{justify}
 \subsection{Bernstein-Vazirani Algorithm}
 \begin{justify}
@@ -510,7 +510,7 @@ As a final note on the Deutsch-Jozsa algorithm, the algorithm known as \textit{D
     \end{equation*}
 where the bit string $x$ is length $n$. Then the value of s would be $s = s_{1}s_{2}\ldots s_{n}$. \\
 
-However, just like in the Deutsch-Jozsa algorithm, the Bernstein-Vazirani algorithm can solve this with a single evaluation. Figure \ref{fig:BernsteinVazirani} shows the circuit for the algorithm.
+However, just like in the Deutsch-Jozsa algorithm, the Bernstein-Vazirani algorithm can be evaluated once to be solved. Figure \ref{fig:BernsteinVazirani} shows the circuit for the algorithm.
     \begin{figure}[h]
         \centering
         \begin{quantikz}
@@ -528,7 +528,7 @@ However, just like in the Deutsch-Jozsa algorithm, the Bernstein-Vazirani algori
 \end{justify}
 \subsection{Shor's Algorithm} \label{sec:ShorsAlgorithm}
 \begin{justify}
-    As discussed in Section \ref{sec:PublickeyCryptography}, the security of RSA is based on the difficulty of finding the prime factors of large numbers. Shor's algorithm, proposed by Peter Shor in 1994, is a quantum algorithm that can factorize large numbers in polynomial time. \cite{Shor1994}
+    As discussed in Section \ref{sec:PublickeyCryptography}, the security of RSA is dependant on the difficulty of calculating the prime factors of large numbers. Shor's algorithm, proposed by Peter Shor in 1994, is a quantum algorithm that can factorize large numbers in polynomial time. \cite{Shor1994}
 
 The RSA algorithm uses 3 large positive integers, $e$, $d$ and $n$, where $n$ is the product of 2 large prime numbers, $p$ and $q$, and for all integers $m(0 \leq m < n)$, both $(m^{e})^{d}$ and $m$ have the same remainder when divided by $n$. That is to say:
     \begin{equation}
@@ -547,8 +547,8 @@ The first observation to make is that, if $n$ is even, then 2 is a factor. This 
 
 Shor's algorithm is as follows:
     \begin{enumerate}
-        \item Choose a random number $a$ such that $1 < a < n$.
-        \item Find the greatest common divisor of $a$ and $n$; $K = \text{gcd}(a, n)$.
+        \item Choose a random number $a$ where $1 < a < n$.
+        \item Find the greatest common divisor $K$ of $a$ and $n$; $K = \text{gcd}(a, n)$.
         \item If $K \neq 1$, then $K$ must be a non-trivial factor and our second factor is $\frac{n}{K}$.
         \item If $K = 1$, then $n$ and $a$ are coprime, so $a$ has a multiplicative order (smallest positive integer) $r$ modulo $n$ such that $a^{r} \equiv 1 \mod n$.
         \item To find $r$ we can use the quantum subroutine in Figure \ref{fig:ShorSubroutine}.
@@ -576,7 +576,7 @@ Shor's algorithm is as follows:
 \end{justify}
 \section{Experimental Quantum Computing}
 \begin{justify}
-What are the experimental challenges in building a QC? In 1996 David DiVincenzo proposed a set of criteria that a physical system must meet in order to be considered for a useful QC. \cite{DiVincenzo1996}
+What are the experimental challenges in building a QC? In 1996 David DiVincenzo proposed a list of criteria that a physical system that can be used to implement a QC must meet to be considered useful. \cite{DiVincenzo1996}
 
 The system:
     \begin{enumerate}
@@ -593,7 +593,7 @@ There have been many different systems that have been used to implement a QC, ea
 \end{justify}
 \section{Conclusion}
 \begin{justify}
-    Quantum computing is a growing rapidly thanks to the potential for quantum computers to solve problems impossible for classical computers. Recent advances see larger numbers of qubits finally enabling algorithms such as Shor's algorithm to be used in practice, allowing quantum algorithms, with their inherent parallelism, to outperform classical algorithms. Using the basic building blocks in this report, many more useful applications of quantum computing can be derived; solving optimization problems, simulating quantum systems, data analysis, cybersecurity and more can benefit. \\
+    Quantum computing is a growing rapidly thanks to the ability for quantum computers to solve problems impossible for classical computers. Recent advances see larger numbers of qubits finally enabling algorithms such as Shor's algorithm to be used in practice, allowing quantum algorithms, with their inherent parallelism, to outperform classical algorithms. Using the basic building blocks in this report, many more useful applications of quantum computing can be derived; solving optimization problems, simulating quantum systems, data analysis, cybersecurity and more can benefit. \\
 \end{justify}
 \newpage
 \appendix
