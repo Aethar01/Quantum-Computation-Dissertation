@@ -78,7 +78,7 @@ Brute-force search systematically generates and tests all potential solutions to
 
 In 1996, Lov Grover published his quantum algorithm for database search \cite{Grover1996} now known as Grover's Algorithm. Grover's Algorithm is able to find this single item in only $O(\sqrt{n})$ steps, and although not a polynomial time speed up, it is still a great increase in speed over classical algorithms. Grover's Algorithm is possible since, quantum mechanical systems can be in a superposition of states and simultaneously evaluate the conditions for multiple items in the database. \\
 
-A year later in 1997, Grover's Algorithm was shown to be asymptotically optimal by Charles Bennett, Ethan Bernstein, Gilles Brassard and Umesh Vazirani. \cite{BennettBernsteinBrassardVazirani1997} An algorithm can be called asymptotically optimal if performs at worst a constant factor worse than the best possible algorithm for large inputs.
+A year later in 1997, Grover's Algorithm was shown to be asymptotically optimal by Charles Bennett, Ethan Bernstein, Gilles Brassard and Umesh Vazirani. \cite{BennettBernsteinBrassardVazirani1997} An algorithm can be called asymptotically optimal if it performs, at worst, a constant factor slower than the best possible algorithm for large inputs.
 \end{justify}
 \subsubsection{Simulation of Quantum Systems}
 \begin{justify}
@@ -454,7 +454,7 @@ Finally, in order to use any information we have computed, we must measure our q
 \section{Quantum Algorithms and Parallelism} \label{sec:QuantumAlgorithms}
 \subsection{Deutsch-Jozsa Algorithm}
 \begin{justify}
-    Originally proposed by David Deutsch and Richard Jozsa in 1992 and updated by Richard Cleve, Artur Ekert, Chiara Macchiavello and Michele Mosca in 1998, \cite{DeutschJozsa1992, CleveEkertMacchiavelloMosca1998} the Deutsch-Jozsa algorithm is one of the earliest examples of a quantum algorithm that outperforms its classical counterpart and while it doesnt have much practical use, it clearly shows the parallelism inherent in quantum computing. \\
+    Originally proposed by David Deutsch and Richard Jozsa in 1992 and updated by Richard Cleve, Artur Ekert, Chiara Macchiavello and Michele Mosca in 1998, \cite{DeutschJozsa1992, CleveEkertMacchiavelloMosca1998} the Deutsch-Jozsa algorithm is one of the earliest examples of a quantum algorithm that outperforms its classical counterpart and while it doesnt have much practical use, it nicely shows the parallelism of quantum computing. \\
 
     The problem that the algorithm aims to solve is as follows: We have a QC ($U_{f}$) of which we have no knowledge of its internal workings. It implements some function $f: \{0, 1\}^{n} \rightarrow \{0, 1\}$ which takes n-bit binarary values as inputs and outputs either a 0 or a 1. Lastly we assume that the function is either constant (always outputs 0 or 1 no matter the input) or balanced (outputs 0 and 1 for half the inputs each). We then wish to determine if the function is constant or balanced. \\
 
