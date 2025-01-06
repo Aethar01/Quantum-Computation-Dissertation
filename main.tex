@@ -146,7 +146,7 @@ where $\theta$ and $\phi$ are the angles of the Bloch sphere shown in Figure \re
               \draw[dashed] (orig) -- (0, -\r); % Dashed line orig and south pole
 
         \end{tikzpicture}
-        \caption{The Bloch Sphere}
+        \caption{The Bloch Sphere.}
         \label{fig:BlochSphere}
     \end{figure}
 
@@ -301,13 +301,13 @@ The CCNOT gate can then be represented as:
                 \end{bmatrix}
     \end{equation}
 
-    While viewing the gates in their matrix forms is useful for tracking the operations each gate makes, a more intuitive way could be to present the gates as circuits more akin to classical computing. This can be seen in Figures \ref{fig:NOT}, \ref{fig:CNOT} and \ref{fig:CCNOT}. \\
+    While viewing the gates in their matrix forms is useful for tracking the operations each gate makes, a more intuitive way could be to present the gates as circuits more akin to classical computing. This can be seen in Figures \ref{fig:NOT}, \ref{fig:CNOT} and \ref{fig:CCNOT}.
     \begin{figure}[h]
         \centering
         \begin{quantikz}
             \lstick{$\ket{a}$} & \gate{X} & \rstick{$\ket{a'}$}
         \end{quantikz}
-        \caption{Circuit for NOT}
+        \caption{Circuit for NOT.}
         \label{fig:NOT}
     \end{figure}
     \begin{figure}[h]
@@ -316,7 +316,7 @@ The CCNOT gate can then be represented as:
             \lstick{$\ket{a}$} & \ctrl{1} & \rstick{$\ket{a}$} \\
             \lstick{$\ket{b}$} & \targ{} & \rstick{$\ket{a, a \oplus b}$}
         \end{quantikz}
-        \caption{Circuit for CNOT}
+        \caption{Circuit for CNOT.}
         \label{fig:CNOT}
     \end{figure}
     \begin{figure}[h]
@@ -326,12 +326,11 @@ The CCNOT gate can then be represented as:
             \lstick{$\ket{b}$} & \ctrl{1} & \rstick{$\ket{b}$} \\
             \lstick{$\ket{c}$} & \targ{} & \rstick{$\ket{a, b, c \oplus (a \land b)}$}
         \end{quantikz}
-        \caption{Circuit for CCNOT}
+        \caption{Circuit for CCNOT.}
         \label{fig:CCNOT}
-    \end{figure}
-\\
+    \end{figure} \\
 
-    With these gates, any classical circuit is constructable. For example, the full adder circuit can be constructed using CNOT and CCNOT gates as shown in Figure \ref{fig:FullAdder}.
+With these gates, any classical circuit is constructable. For example, the full adder circuit can be constructed using CNOT and CCNOT gates as shown in Figure \ref{fig:FullAdder}.
     \begin{figure}[h]
         \centering
         \begin{quantikz}
@@ -340,7 +339,7 @@ The CCNOT gate can then be represented as:
             \lstick{$\ket{C_{in}}$} & & & \ctrl{1} & \targ{} & & \rstick{$\ket{S}$} \\
             \lstick{$\ket{0}$} & \targ{} & & \targ{} & & & \rstick{$\ket{C_{out}}$}
         \end{quantikz}
-        \caption{Circuit for Full Adder where $S$ is the sum and $C_{in/out}$ is the carry in/out}
+        \caption{Circuit for Full Adder where $S$ is the sum and $C_{in/out}$ is the carry in/out.}
         \label{fig:FullAdder}
     \end{figure}
 \\
@@ -447,7 +446,7 @@ Finally, in order to use any information we have computed, we must measure our q
                 \lstick{y} & & \targ{} & \rstick{}
             \end{quantikz}
         \end{eqnarray*}
-        \caption{Circuit for creating a Bell state}
+        \caption{Circuit for creating a Bell state.}
         \label{fig:BellState}
     \end{figure}
 \end{justify}
@@ -465,7 +464,7 @@ The classical solution to this problem would be to evaluate the function for all
             \lstick{$\ket{0}$} & \qwbundle{n} \slice{$\ket{\Psi_{0}}$} & \gate{H^{\otimes n}} \slice{$\ket{\Psi_{1}}$} & \gate[2][2cm]{U_{f}}\gateinput{$x$}\gateoutput{$x$} \slice{$\ket{\Psi_{2}}$} & \gate{H^{\otimes n}} \slice{$\ket{\Psi_{3}}$} & \meter{} \\
             \lstick{$\ket{1}$} & & \gate{H} & \gateinput{$y$}\gateoutput{$y\oplus f(x)$} & &
         \end{quantikz}
-        \caption{Circuit for the Deutsch-Jozsa algorithm}
+        \caption{Circuit for the Deutsch-Jozsa algorithm.}
         \label{fig:DeutschJozsa}
     \end{figure}
 
@@ -516,7 +515,7 @@ However, just like in the Deutsch-Jozsa algorithm, the Bernstein-Vazirani algori
         \begin{quantikz}
             \lstick{$\ket{0}$} & \qwbundle{n} \slice{$\ket{\Psi_{0}}$} & \gate{H^{\otimes n}} \slice{$\ket{\Psi_{1}}$} & \gate{U_{f}} \slice{$\ket{\Psi_{2}}$} & \gate{H^{\otimes n}} \slice{$\ket{\Psi_{3}}$} & \meter{}
         \end{quantikz}
-        \caption{Circuit for the Bernstein-Vazirani algorithm}
+        \caption{Circuit for the Bernstein-Vazirani algorithm.}
         \label{fig:BernsteinVazirani}
     \end{figure}
 
@@ -563,7 +562,7 @@ Shor's algorithm is as follows:
             \lstick{$\ket{0}$} & \gate{H} & \ctrl{1} & & \hdots & & & \meter{} \\
             \lstick{$\ket{1}$} & \qwbundle{n} & \gate{Ua^{2^0}} & \gate{Ua^{2^1}} & \hdots & \gate{U^{2^{2n-1}}} & 
         \end{quantikz}
-        \caption{Quantum subroutine for Shor's algorithm from Figure 1 in Circuit for Shor's algorithm using $2n+3$ qubits by Stephane Beauregard \cite{Beauregard2003}}
+        \caption{Quantum subroutine for Shor's algorithm from Figure 1 in Circuit for Shor's algorithm using $2n+3$ qubits by Stephane Beauregard. \cite{Beauregard2003}}
         \label{fig:ShorSubroutine}
     \end{figure}
     Figure \ref{fig:ShorSubroutine} shows the quantum subroutine for Shor's algorithm using $2n+3$ qubits. It uses \textit{quantum phase estimation} \cite{Kitaev1995} by a \textit{quantum Fourier transform} [\ref{sec:QFT}] on an input state $\ket{0}^{\otimes n}\ket{1}$:
@@ -610,7 +609,7 @@ There have been many different systems that have been used to implement a QC, ea
         \hline
         Super-conducting qubits \cite{Huang2020} & Charge, flux or phase of superconducting circuits. & Wait for thermalization. & Pulsed microwave signals. Couplings are capacitive. & Electrometer or magnetometer if using flux qubits. \\
     \end{tabular}
-    \caption{Experimental implementations of quantum computing}
+    \caption{Experimental implementations of quantum computing.}
     \label{fig:ExperimentalImplementations}
 \end{figure}
 \section{\\Quantum Fourier Transform} \label{sec:QFT}
@@ -661,7 +660,7 @@ There have been many different systems that have been used to implement a QC, ea
             \lstick{$\ket{x_{n-1}}$} &  &  &  & \ctrl{-4} &  &  &   & \hdots & \gate{H} & \gate{R_{2}} &   & \rstick {$\frac{\ket{0}+\exp{2\pi i[0.x_{n-1}x_n]}\ket{1}}{\sqrt{2}}$} \\
             \lstick{$\ket{x_{n}}$} &  &  &  &  & \ctrl{-5} &  &  & \hdots &  & \ctrl{-1} & \gate{H} & \rstick{$\frac{\ket{0}+\exp{2\pi i[0.x_n]}\ket{1}}{\sqrt{2}}$}
         \end{quantikz}
-        \caption{Circuit for the Quantum Fourier Transform where $R_{k}$ is the controlled rotation gate $R_{k} = \begin{bmatrix} 1 & 0 \\ 0 & e^{2\pi i/2^{k}} \end{bmatrix}$ and the notation $0.x$ is the binary fraction like $0.x_{1}x_{2}\ldots x_{n} = \frac{x_{1}}{2^1} + \frac{x_{2}}{2^2} + \ldots + \frac{x_{n}}{2^{n}}$}
+        \caption{Circuit for the Quantum Fourier Transform where $R_{k}$ is the controlled rotation gate $R_{k} = \begin{bmatrix} 1 & 0 \\ 0 & e^{2\pi i/2^{k}} \end{bmatrix}$ and the notation $0.x$ is the binary fraction like $0.x_{1}x_{2}\ldots x_{n} = \frac{x_{1}}{2^1} + \frac{x_{2}}{2^2} + \ldots + \frac{x_{n}}{2^{n}}$.}
         \label{fig:QFT}
     \end{figure}
 \section{\\Further Reading}
